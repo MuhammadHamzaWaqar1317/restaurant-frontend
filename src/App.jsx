@@ -4,7 +4,11 @@ import socket from "../src/Socket/socket";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { useDispatch } from "react-redux";
-import { addMenuItem } from "./Redux/Slices/MenuSlice";
+import {
+  addMenuItem,
+  updateMenuItem,
+  deleteMenuItem,
+} from "./Redux/Slices/MenuSlice";
 
 function App({ children }) {
   const dispatch = useDispatch();
@@ -16,16 +20,24 @@ function App({ children }) {
       console.log("new menu  item added server", message);
       dispatch(addMenuItem(message));
     });
+
+    socket.on("menu_item_updated", (message) => {
+      console.log(" menu  item updated server", message);
+      dispatch(updateMenuItem(message));
+    });
+
+    socket.on("menu_item_deleted", (message) => {
+      console.log(" menu  item deleted server", message);
+      dispatch(deleteMenuItem(message));
+    });
+
     return () => {
       socket.off("menu_item_added");
+      socket.off("menu_item_updated");
+      socket.off("menu_item_deleted");
     };
   }, []);
-  return (
-    <>
-      {children}
-      <div className="text-3xl">asd</div>
-    </>
-  );
+  return <>{children}</>;
 }
 
 export default App;

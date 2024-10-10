@@ -1,32 +1,87 @@
-import React from "react";
-import { Form, Input, Button } from "antd";
+import React, { useEffect, useState } from "react";
+import { Form, Input, Button, Card } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { addMenuThunk } from "../../Redux/Thunks/MenuApi";
+import {
+  addMenuThunk,
+  getMenuThunk,
+  updateMenuThunk,
+  deleteMenuThunk,
+} from "../../Redux/Thunks/MenuApi";
+import Modal from "../Modal";
 function Menu() {
   const dispatch = useDispatch();
   const menu = useSelector((state) => state.menuSlice.menu);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [menuMethod, setMenuMethod] = useState("");
+  const [updateMenuItemObj, setUpdateMenuItemObj] = useState({});
 
-  const handleFinish = (body) => {
+  const [formArray, setFormArray] = useState([
+    "name",
+    "category",
+    "price",
+    "description",
+  ]);
+
+  const openModal = (menuMethodText) => {
+    setIsModalOpen(true);
+    setMenuMethod(menuMethodText);
+  };
+
+  const updateModal = (menuItemObj) => {
+    setUpdateMenuItemObj({ ...menuItemObj });
+    openModal("update");
+  };
+
+  const addMenuItem = (body) => {
     console.log(body);
     dispatch(addMenuThunk(body));
   };
+
+  const updateMenuItem = (body) => {
+    const { _id } = updateMenuItemObj;
+    dispatch(updateMenuThunk({ ...body, _id }));
+    setUpdateMenuItemObj({});
+  };
+
+  const deleteMenuItem = (_id) => {
+    const deleteParam = new URLSearchParams({
+      _id: _id,
+    });
+    dispatch(deleteMenuThunk(deleteParam));
+  };
   console.log(menu);
 
+  useEffect(() => {
+    dispatch(getMenuThunk());
+  }, []);
   return (
     <>
-      <div className="h-screen">
-        <Form onFinish={handleFinish}>
-          <Form.Item name={"name"}>
-            <Input></Input>
-          </Form.Item>
-          <Form.Item name={"category"}>
-            <Input></Input>
-          </Form.Item>
-          <Form.Item>
-            <Button htmlType="submit">submit</Button>
-          </Form.Item>
-        </Form>
-        <div className="text-3xl">abd</div>
+      <div className="h-screen max-w-[100vw]">
+        <Button onClick={() => openModal("add")}>Add Menu Item</Button>
+        <Modal
+          formArray={formArray}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          addMenuItem={addMenuItem}
+          menuMethod={menuMethod}
+          updateMenuItem={updateMenuItem}
+          updateMenuItemObj={updateMenuItemObj}
+        />
+        {menu?.map(({ price, category, name, description, _id }) => (
+          <Card title={name} bordered={false} style={{ width: 300 }}>
+            <p>Category {category}</p>
+            <p>price {price}</p>
+            <p>description {description}</p>
+            <Button
+              onClick={() =>
+                updateModal({ price, category, name, description, _id })
+              }
+            >
+              Update
+            </Button>
+            <Button onClick={() => deleteMenuItem(_id)}>Delete</Button>
+          </Card>
+        ))}
       </div>
     </>
   );
