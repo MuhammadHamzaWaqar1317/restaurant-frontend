@@ -10,13 +10,28 @@ import {
 import { Provider } from "react-redux";
 import { store } from "../store.js";
 
-import Menu from "./Components/Admin/Menu.jsx";
+import Menu from "./Components/Admin/Menu/Menu.jsx";
+import Signup from "./Components/Authenticate/signup.jsx";
 import Layout from "./Components/Admin/Layout.jsx";
+import Home from "./Components/Home/home.jsx";
+import Admin_Layout from "./Components/Admin/Admin_Layout.jsx";
 
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/signIn",
+    element: <Menu />,
+  },
+  {
+    path: "/signUp",
+    element: <Signup />,
+  },
+  {
     path: "/admin",
-    element: <Layout />,
+    element: <Admin_Layout />,
     children: [
       {
         index: true,
