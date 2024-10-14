@@ -14,6 +14,8 @@ function Modal({
   updateMenuItemObj,
   ModalForm,
 }) {
+  console.log(menuMethod);
+
   const [form] = Form.useForm();
   const handleCancel = () => {
     setIsModalOpen(false);
@@ -23,8 +25,8 @@ function Modal({
     console.log(body);
 
     const menuActions = {
-      add: () => addMenuItem(body),
-      update: () => updateMenuItem(body),
+      Add: () => addMenuItem(body),
+      Update: () => updateMenuItem(body),
     };
     menuActions[menuMethod]();
     form.resetFields();
