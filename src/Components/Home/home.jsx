@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import "./home.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { getMenuThunk } from "../../Redux/Thunks/MenuApi";
+// useNavigate
+import { useNavigate } from "react-router-dom";
 // Images
 import logo from "../../assets/logo.png";
 import menu from "../../assets/menu.png";
@@ -31,6 +33,8 @@ import linkdin from "../../assets/linkdin.png";
 import twitter from "../../assets/twitter.png";
 
 function Home() {
+  // useNavigate Variable
+  const navigate = useNavigate();
   // Chicken API Item
   const dispatch = useDispatch();
   const { Fries, Burger, Chicken, Salads, Drinks, Sauces } = useSelector(
@@ -73,13 +77,20 @@ function Home() {
       price: 350,
       image: Burger_1,
     },
-    // {
-    //   id: 2,
-    //   name: "Jalapeno Burger",
-    //   description: "With Tender Chicken Fillet",
-    //   price: 750,
-    //   image: Burger_2,
-    // },
+    {
+      id: 2,
+      name: "Jalapeno Burger",
+      description: "With Tender Chicken Fillet",
+      price: 750,
+      image: Burger_2,
+    },
+    {
+      id: 3,
+      name: "Biger",
+      description: "Smoked Beef, Cheddar",
+      price: 800,
+      image: Burger_3,
+    },
     {
       id: 3,
       name: "Biger",
@@ -207,7 +218,7 @@ function Home() {
               <ul>
                 <li id="Special_Li">Home</li>
                 <li>Services</li>
-                <li>About</li>
+                <li onClick={() => navigate("/about")}>About</li>
                 <li>Contact</li>
               </ul>
             </div>
@@ -230,7 +241,7 @@ function Home() {
               {/* - Part 3 B - */}
               <div className="Navbar_Main_Part_3_B">
                 {/* <button>JOIN</button> */}
-                <a href="#" id="My_Btn">
+                <a href="#" id="My_Btn" onClick={() => navigate("/login")}>
                   <span></span>
                   <span></span>
                   <span></span>
@@ -274,9 +285,10 @@ function Home() {
         </div>
       </div>
 
+      {/* 3 - Menu - ( New ) */}
       <div className="Parent_Menu_Whole">
         <div className="Parent_Menu_Whole_Sub">
-          {Chicken.length != 0 && (
+          {/* {Chicken.length != 0 && (
             <MenuItem categoryText={"Chicken"} ItemArray={Chicken} />
           )}
           {Burger.length != 0 && (
@@ -295,7 +307,32 @@ function Home() {
           )}
           {Sauces.length != 0 && (
             <MenuItem categoryText={"Sauces"} ItemArray={Sauces} />
-          )}
+          )} */}
+          {/* --- New Home Page Menu Design Testing - ( Using Grid ) */}
+          <div className="Menu_Box">
+            <h1>Burger</h1>
+            <div className="Menu_Box_Sub">
+              {/* Item */}
+              {burgerData.map((item) => (
+                <div key={item.id} className="Menu_Item_Box">
+                  <div className="Menu_Item_Box_Sub">
+                    <div className="Menu_Item_Box_Sub_Part1">
+                      <p className="Menu_Item_P1">{item.name}</p>
+                      <span>{item.description}</span>
+                      <p className="Menu_Item_P2">PKR {item.price}</p>
+                    </div>
+                    <div className="Menu_Item_Box_Sub_Part2">
+                      <img src={item.image} alt="NA" />
+                    </div>
+                    <button>
+                      <i className="fa fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* --- New Home Page Menu Design Testing - ( Using Grid ) */}
         </div>
       </div>
       {/* 4 - Footer */}
