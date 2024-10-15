@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button, Card } from "antd";
+import { Form, Input, Button, Card, Select, Upload } from "antd";
+
+import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addMenuThunk,
@@ -8,6 +10,7 @@ import {
   deleteMenuThunk,
 } from "../../../Redux/Thunks/MenuApi";
 import Modal from "./Modal";
+import ModalComponent from "../../ModalComponent/ModalComponent";
 // --- Burger Images ---
 // import Burger_1 from "../../assets/Menu_Pics/burger1.jpg";
 // import Burger_2 from "../../assets/Menu_Pics/burger2.jpg";
@@ -35,6 +38,8 @@ function Menu() {
     },
   ];
   // --- Menu Burger Dummy Araray ---
+
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
   const { Fries, Burger, Chicken, Salads, Drinks, Sauces } = useSelector(
     (state) => state.menuSlice.menu
@@ -88,11 +93,113 @@ function Menu() {
   useEffect(() => {
     dispatch(getMenuThunk());
   }, []);
+  const setForm = () => {
+    const { name, price, category, description, img } = updateMenuItemObj;
+    return [
+      {
+        name: "name",
+        value: name,
+      },
+      {
+        name: "category",
+        value: category,
+      },
+      {
+        name: "price",
+        value: price,
+      },
+      {
+        name: "dragger",
+        value: [
+          { uid: "-1", name: "image.png", status: "done", thumbUrl: img },
+        ],
+      },
+      {
+        name: "description",
+        value: description,
+      },
+    ];
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
+  };
+
+  const FormContent = () => {
+    const handleFinish = (body) => {
+      const menuActions = {
+        Add: () => addMenuItem(body),
+        Update: () => updateMenuItem(body),
+      };
+      menuActions[menuMethod]();
+      form.resetFields();
+      setIsModalOpen(false);
+    };
+    const categoryOptions = [
+      { value: "Chicken", label: "Chicken" },
+      { value: "Burger", label: "Burger" },
+      { value: "Fries", label: "Fries" },
+      { value: "Salads", label: "Salads" },
+      { value: "Drinks", label: "Drinks" },
+      { value: "Sauces", label: "Chicken" },
+    ];
+
+    const normFile = (e) => {
+      console.log("Upload event:", e);
+      if (Array.isArray(e)) {
+        return e;
+      }
+      return e?.fileList;
+    };
+
+    return (
+      <>
+        <Form onFinish={handleFinish} form={form} layout="vertical">
+          <Form.Item label="Name" name={"name"}>
+            <Input placeholder={"Enter Name"}></Input>
+          </Form.Item>
+          <Form.Item label="Price" name={"price"}>
+            <Input placeholder={"Enter Price"} type="number"></Input>
+          </Form.Item>
+          <Form.Item label="Category" name={"category"}>
+            <Select
+              allowClear
+              options={categoryOptions}
+              placeholder="select Category"
+            />
+          </Form.Item>
+          <Form.Item label="Description" name={"description"}>
+            <Input placeholder={"Enter Description"}></Input>
+          </Form.Item>
+
+          <Form.Item label="Image">
+            <Form.Item
+              name="dragger"
+              valuePropName="fileList"
+              getValueFromEvent={normFile}
+              noStyle
+            >
+              <Upload.Dragger maxCount={1} name="files" listType="picture">
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined />
+                </p>
+                <p className="ant-upload-text">
+                  Click or drag Image to this area to upload
+                </p>
+              </Upload.Dragger>
+            </Form.Item>
+          </Form.Item>
+        </Form>
+      </>
+    );
+  };
+
   return (
     <>
       <div className="h-screen max-w-[100vw]">
         <Button onClick={() => openModal("Add")}>Add Menu Item</Button>
-        <Modal
+        {/* <Modal
           formArray={formArray}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
@@ -100,8 +207,19 @@ function Menu() {
           menuMethod={menuMethod}
           updateMenuItem={updateMenuItem}
           updateMenuItemObj={updateMenuItemObj}
+        /> */}
+        <ModalComponent
+          FormContent={FormContent}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          addItem={addMenuItem}
+          updateItem={updateMenuItem}
+          updateItemObj={updateMenuItemObj}
+          method={menuMethod}
+          form={form}
+          handleCancel={handleCancel}
+          setForm={setForm}
         />
-
         {Chicken.length != 0 && (
           <MenuCategory
             categoryText={"Chicken"}
