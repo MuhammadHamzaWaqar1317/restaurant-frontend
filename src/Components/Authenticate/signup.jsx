@@ -7,7 +7,7 @@ import { signUpThunk } from "../../Redux/Thunks/UserApi";
 // Login CSS
 import "./login.scss";
 // Img
-// import login from "../../assets/signup.png";
+import login from "../../assets/signup.png";
 
 function Signup() {
   // useNavigate Variable
@@ -28,7 +28,7 @@ function Signup() {
         <div className="Sub_Login_Whole">
           <div className="Login_Main">
             <div className="Login_Main_Part_2">
-              {/* <img src={login} alt="NA" /> */}
+              <img src={login} alt="NA" />
               <p>Join us by creating an account with your email</p>
             </div>
             <div className="Login_Main_Part_1">
@@ -36,24 +36,35 @@ function Signup() {
               <div className="Login_Main_Part_Sub">
                 <p className="Login_P">Create Your New Account</p>
 
-                <Form onFinish={handleFinish}>
-                  <Form.Item name={"name"}>
-                    <Input placeholder="Enter Name"></Input>
-                  </Form.Item>
-                  <Form.Item name={"email"}>
-                    <Input type="email" placeholder="Enter Email"></Input>
-                  </Form.Item>
-                  <Form.Item name={"password"}>
-                    <Input.Password
-                      type="email"
-                      placeholder="Enter Password"
-                    ></Input.Password>
-                  </Form.Item>
+                {/* Field Box */}
+                <div className="Login_Field_Box_Signup">
+                  <Form onFinish={handleFinish}>
+                    <Form.Item name={"name"}>
+                      <Input
+                        className="My_Signup_Inp"
+                        placeholder="Enter Name"
+                      ></Input>
+                    </Form.Item>
+                    <Form.Item name={"email"}>
+                      <Input
+                        className="My_Signup_Inp"
+                        type="email"
+                        placeholder="Enter Email"
+                      ></Input>
+                    </Form.Item>
+                    <Form.Item name={"password"}>
+                      <Input.Password
+                        className="My_Signup_Inp_Pass"
+                        type="email"
+                        placeholder="Enter Password"
+                      ></Input.Password>
+                    </Form.Item>
 
-                  <Form.Item>
-                    <Button htmlType="submit">SignUp</Button>
-                  </Form.Item>
-                </Form>
+                    <Form.Item>
+                      <Button className="My_Signup_Inp_Btn" htmlType="submit">Sign Up</Button>
+                    </Form.Item>
+                  </Form>
+                </div>
 
                 {/* Field Box Last */}
                 <div className="Login_Field_Box_Last">
