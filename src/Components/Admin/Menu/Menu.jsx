@@ -18,7 +18,6 @@ import Burger_3 from "../../../assets/Menu_Pics/burger3.jpg";
 import "./Menu_Admin.scss";
 
 function Menu() {
-  
   // --- Menu Burger Dummy Araray ---
   // Burger API Item
   const burgerData = [
@@ -28,6 +27,13 @@ function Menu() {
       description: "With Patty With Curunch Sauce & Crispy and Smoke Chiken",
       price: 350,
       image: Burger_1,
+    },
+    {
+      id: 2,
+      name: "Jalapeno Burger",
+      description: "With Patty With Jalapeno Sauce & Crispy and Smoke Chiken",
+      price: 700,
+      image: Burger_2,
     },
     {
       id: 2,
@@ -98,7 +104,7 @@ function Menu() {
         {/* <div> */}
         <Button onClick={() => openModal("Add")}>Add Menu Item</Button>
         {/* --- New Menu Design --- */}
-        <div className="New_Menu_Box">
+        {/* <div className="New_Menu_Box">
           <br />
           <h1>Burger</h1>
           <div className="New_Menu_Box_Sub">
@@ -125,9 +131,9 @@ function Menu() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
         {/* --- New Menu Design --- */}
-        {/* <Modal
+        <Modal
           formArray={formArray}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
@@ -184,7 +190,7 @@ function Menu() {
             updateModal={updateModal}
             deleteMenuItem={deleteMenuItem}
           />
-        )} */}
+        )}
       </div>
     </>
   );
@@ -198,10 +204,10 @@ function MenuCategory({
 }) {
   return (
     <>
-      <div className="Menu_Box">
+      <div className="New_Menu_Box">
         <br />
         <h1>{categoryText}</h1>
-        <div className="Menu_Box_Sub">
+        <div className="New_Menu_Box_Sub">
           {menuItemsArray?.map(
             ({ description, name, price, img, _id, category }) => (
               <MenuItem
@@ -234,31 +240,31 @@ function MenuItem({
 }) {
   return (
     <>
-      <div className="Menu_Item_Box">
-        <div className="Menu_Item_Box_Sub">
-          <div className="Menu_Item_Box_Sub_Part1">
-            <p className="Menu_Item_P1">{name}</p>
-            <span>{description}</span>
-            <p className="Menu_Item_P2">PKR {price}</p>
+      <div className="New_Menu_Item_Box">
+        <div className="New_Menu_Item_Box_Sub">
+          <div className="New_Menu_Item_Box_Part_1">
+            <img src={img} alt="NA" />
           </div>
-          <div className="Menu_Item_Box_Sub_Part2">
-            <img src={img} alt={name} />
-          </div>
-          <div className="Menu_Item_Box_Part_2_Btn_Parent">
-            <button
-              onClick={() =>
-                updateModal({ price, category, name, description, _id, img })
-              }
-              className="P2_Btn_2"
-            >
-              <i class="fa fa-pencil"></i>
-            </button>
-            <button
-              onClick={() => deleteMenuItem(_id, category)}
-              className="P2_Btn_1"
-            >
-              <i class="fa fa-trash"></i>
-            </button>
+          <div className="New_Menu_Item_Box_Part_2">
+            <h3>{name}</h3>
+            <p>{description}</p>
+            <h5>{price} PKR</h5>
+            <div className="New_Btn_Parent">
+              <button
+                onClick={() =>
+                  updateModal({ price, category, name, description, _id, img })
+                }
+                className="New_Btn_1"
+              >
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button
+                onClick={() => deleteMenuItem(_id, category)}
+                className="New_Btn_2"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
