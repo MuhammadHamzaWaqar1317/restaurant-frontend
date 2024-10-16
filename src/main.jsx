@@ -14,6 +14,7 @@ import Menu from "./Components/Admin/Menu/Menu.jsx";
 import Signup from "./Components/Authenticate/signup.jsx";
 import Layout from "./Components/Admin/Layout.jsx";
 import Home from "./Components/Home/home.jsx";
+import Branch from "./Components/Admin/Branch/Branch.jsx";
 import Admin_Layout from "./Components/Admin/Admin_Layout.jsx";
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Menu />,
+      },
+      {
+        path: "branch",
+        element: <Branch />,
       },
     ],
   },

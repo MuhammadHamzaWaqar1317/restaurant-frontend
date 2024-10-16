@@ -14,7 +14,7 @@ function ModalComponent({
 }) {
   useEffect(() => {
     form.setFields([...setForm()]);
-  }, [updateItemObj]);
+  }, [isModalOpen]);
   return (
     <>
       <Modal
