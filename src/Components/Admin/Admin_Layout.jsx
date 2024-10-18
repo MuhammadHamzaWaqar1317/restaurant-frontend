@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
   ShopOutlined,
+  CoffeeOutlined
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom"; // Import useNavigate
 const { Header, Sider, Content } = Layout;
 import My_Menu from "./Menu/Menu";
+import Branch from "./Branch/Branch"; // Import the Branch component
 // CSS
 import "./Menu/Menu_Admin.scss";
 // Image
@@ -21,13 +20,17 @@ const Admin_Layout = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const navigate = useNavigate(); // Initialize navigate function for routing
+
   return (
     <Layout>
       <Sider
         trigger={null}
         collapsible
         collapsed={collapsed}
-        className="bg-slate-300"
+        className="bg-green-950"
+        // style={{ backgroundColor: "#CBD5E1", }}
       >
         <div className="demo-logo-vertical" />
         {/* - Logo Image -  */}
@@ -39,19 +42,42 @@ const Admin_Layout = () => {
           theme="light"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          className="bg-slate-300"
+          className="bg-green-950"
+          // style={{ backgroundColor: "#0a4621", }}
           items={[
             {
               key: "1",
-              icon: <ShopOutlined />,
+              icon: <CoffeeOutlined />,
               label: "Menu",
               style: {
-                backgroundColor: "#BC0000",
-                color: "#FFFFFF",
+                backgroundColor: "#e7f0e7",
+                color: "#0a4621",
                 borderRadius: "5px",
                 fontSize: "15px",
                 letterSpacing: "1px",
+                display: "block",
+                margin: "0px auto 0px auto",
+                width: "92%",
               },
+              // Add navigation for "Menu" label
+              onClick: () => navigate("/admin"),
+            },
+            {
+              key: "2",
+              icon: <ShopOutlined />,
+              label: "Branch",
+              style: {
+                backgroundColor: "#e7f0e7",
+                color: "#0a4621",
+                borderRadius: "5px",
+                fontSize: "15px",
+                letterSpacing: "1px",
+                display: "block",
+                margin: "10px auto 0px auto",
+                width: "92%",
+              },
+              // Add navigation for "Branch" label
+              onClick: () => navigate("/admin/branch"),
             },
           ]}
         />
@@ -60,7 +86,8 @@ const Admin_Layout = () => {
         <Header
           style={{
             padding: 0,
-            background: colorBgContainer,
+            // background: "#7aa894",
+            background: "white",
           }}
         >
           <Button
@@ -71,8 +98,9 @@ const Admin_Layout = () => {
               fontSize: "10px",
               width: 64,
               height: 64,
+              // backgroundColor: "#7aa894",
               backgroundColor: "white",
-              color: "#Bc0000",
+              color: "#0a4621",
             }}
           />
         </Header>
@@ -80,17 +108,15 @@ const Admin_Layout = () => {
           style={{
             margin: "24px 16px",
             padding: 24,
-            // width: "100%",
-            // height: 660,
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}
         >
-          {/* <My_Menu /> */}
           <Outlet />
         </Content>
       </Layout>
     </Layout>
   );
 };
+
 export default Admin_Layout;
