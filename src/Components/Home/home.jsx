@@ -288,12 +288,13 @@ function Home() {
       {/* 3 - Menu - ( New ) */}
       <div className="Parent_Menu_Whole">
         <div className="Parent_Menu_Whole_Sub">
-          {/* {Chicken.length != 0 && (
-            <MenuItem categoryText={"Chicken"} ItemArray={Chicken} />
-          )}
           {Burger.length != 0 && (
             <MenuItem categoryText={"Burger"} ItemArray={Burger} />
           )}
+          {/* {Chicken.length != 0 && (
+            <MenuItem categoryText={"Chicken"} ItemArray={Chicken} />
+          )}
+          
 
           {Fries.length != 0 && (
             <MenuItem categoryText={"Fries"} ItemArray={Fries} />
