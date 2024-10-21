@@ -86,27 +86,37 @@ import AdminSiderMenu from "./Components/Admin/AdminSiderMenu.jsx";
 import UserSiderMenu from "./Components/User/UserSiderMenu.jsx";
 import Reservation from "./Components/User/Reservation/Reservation.jsx";
 
+import ProtectedRoutes from "./Components/Routes/ProtectedRoutes.jsx";
+import PublicRoutes from "./Components/Routes/PublicRoutes.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <PublicRoutes />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "menu",
+        element: <Menu />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signUp",
+        element: <Signup />,
+      },
+    ],
   },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/menu",
-    element: <Menu />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/signUp",
-    element: <Signup />,
-  },
+
   {
     path: "/admin",
     element: <Layout Menu={AdminSiderMenu} />,
