@@ -34,6 +34,35 @@ function Reservations() {
     (state) => state.reservationSlice.reservations
   );
 
+  const dummyData = [
+    {
+      customerId: "671660cfee058464c3f8ea78",
+      branchId: "670fd77c110152d4ef2319a3",
+      date: "2024-10-22",
+      startTime: "22:00:00.000Z",
+      endTime: "01:00:00.000Z",
+      peopleQty: 2,
+      _id: "6717b24dc98ac43f524f7019",
+      createdAt: "2024-10-22T14:10:21.234Z",
+      updatedAt: "2024-10-22T14:10:21.234Z",
+      __v: 0,
+      customerName: "ads",
+    },
+    {
+      customerId: "671660cfee058464c3f8ea78",
+      branchId: "670fd77c110152d4ef2319a3",
+      date: "2024-10-22",
+      startTime: "22:00:00.000Z",
+      endTime: "01:00:00.000Z",
+      peopleQty: 2,
+      _id: "6717b24dc98ac43f524f7019",
+      createdAt: "2024-10-22T14:10:21.234Z",
+      updatedAt: "2024-10-22T14:10:21.234Z",
+      __v: 0,
+      customerName: "ads",
+    },
+  ];
+
   useEffect(() => {
     dispatch(getBranchThunk());
     dispatch(getReservationThunk());
@@ -143,15 +172,19 @@ function Reservations() {
       title: "Customer Name",
       dataIndex: "customerName",
       key: "customerName",
+      render: (_, record) => {
+        return <>{"Rehmat Qazi"}</>;
+      },
     },
     {
       title: "Branch",
       dataIndex: "branchId",
       key: "branchId",
       render: (_, record) => {
-        const address = branches?.find(
-          ({ _id }) => record.branchId === _id
-        )?.address;
+        const address = "house abc, street 123, sector abc, pwd, Rawalpindi";
+        // const address = branches?.find(
+        //   ({ _id }) => record.branchId === _id
+        // )?.address;
         return <>{address}</>;
       },
     },
@@ -208,7 +241,7 @@ function Reservations() {
         FormContent={FormContent}
         handleCancel={handleCancel}
       />
-      <Table dataSource={reservations} columns={columns} />
+      <Table dataSource={dummyData} columns={columns} />
     </>
   );
 }
