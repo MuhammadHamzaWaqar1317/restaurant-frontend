@@ -120,7 +120,11 @@ const router = createBrowserRouter([
 
   {
     path: "/admin",
-    element: <Layout Menu={AdminSiderMenu} />,
+    element: (
+      <ProtectedRoutes allowedRole={["admin"]}>
+        <Layout Menu={AdminSiderMenu} />
+      </ProtectedRoutes>
+    ),
     children: [
       {
         index: true,
@@ -138,7 +142,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <Layout Menu={UserSiderMenu} />,
+    element: (
+      <ProtectedRoutes allowedRole={["user"]}>
+        <Layout Menu={UserSiderMenu} />
+      </ProtectedRoutes>
+    ),
     children: [
       {
         index: true,

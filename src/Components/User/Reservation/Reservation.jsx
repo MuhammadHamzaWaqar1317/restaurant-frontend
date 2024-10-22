@@ -43,17 +43,17 @@ function Reservation() {
   };
 
   const updateReservation = (body) => {
-    const { _id } = updateReservationObj;
-    body = { ...body, ...processDateTime(body), _id };
+    const { _id, customerName, customerId } = updateReservationObj;
+    body = { ...body, ...processDateTime(body), _id, customerName, customerId };
     console.log("updated reservation", body);
     setUpdateReservationObj({});
     dispatch(updateReservationThunk(body));
   };
 
-  const deleteReservation = (_id) => {
+  const deleteReservation = (_id, customerId) => {
     console.log(_id);
 
-    dispatch(deleteReservationThunk({ _id }));
+    dispatch(deleteReservationThunk({ _id, customerId }));
   };
 
   const openModal = (reservationMethodText) => {
@@ -159,7 +159,16 @@ function Reservation() {
         handleCancel={handleCancel}
       />
       {reservations?.map(
-        ({ branchId, peopleQty, date, startTime, endTime, _id }) => {
+        ({
+          branchId,
+          peopleQty,
+          date,
+          startTime,
+          endTime,
+          _id,
+          customerName,
+          customerId,
+        }) => {
           const address = branches?.find(
             ({ _id }) => branchId === _id
           )?.address;
@@ -182,12 +191,16 @@ function Reservation() {
                     startTime,
                     endTime,
                     _id,
+                    customerName,
+                    customerId,
                   })
                 }
               >
                 Edit
               </Button>
-              <Button onClick={() => deleteReservation(_id)}>Delete</Button>
+              <Button onClick={() => deleteReservation(_id, customerId)}>
+                Delete
+              </Button>
             </div>
           );
         }

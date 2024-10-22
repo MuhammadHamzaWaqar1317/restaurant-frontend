@@ -40,17 +40,17 @@ function Reservations() {
   }, []);
 
   const updateReservation = (body) => {
-    const { _id } = updateReservationObj;
-    body = { ...body, ...processDateTime(body), _id };
+    const { _id, customerName, customerId } = updateReservationObj;
+    body = { ...body, ...processDateTime(body), _id, customerName, customerId };
     console.log("updated reservation", body);
     setUpdateReservationObj({});
     dispatch(updateReservationThunk(body));
   };
 
-  const deleteReservation = (_id) => {
+  const deleteReservation = (_id, customerId) => {
     console.log(_id);
 
-    dispatch(deleteReservationThunk({ _id }));
+    dispatch(deleteReservationThunk({ _id, customerId }));
   };
 
   const openModal = (reservationMethodText) => {
@@ -190,7 +190,7 @@ function Reservations() {
             type="primary"
             danger
             ghost
-            onClick={() => deleteReservation(record._id)}
+            onClick={() => deleteReservation(record._id, record.customerId)}
           >
             <DeleteOutlined />
           </Button>
