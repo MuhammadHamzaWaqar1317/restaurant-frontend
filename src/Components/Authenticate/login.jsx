@@ -42,33 +42,37 @@ function Login() {
                 <p className="Login_P">
                   Kindly provide your valid Credentials to continue
                 </p>
-                {/* Field Box */}
-                <Form onFinish={handleFinish}>
-                  <Form.Item name={"email"}>
-                    <Input
-                      className="My_Signup_Inp"
-                      type="email"
-                      placeholder="Enter Email"
-                    ></Input>
-                  </Form.Item>
-                  <Form.Item name={"password"}>
-                    <Input.Password
-                      className="My_Signup_Inp_Pass"
-                      type="email"
-                      placeholder="Enter Password"
-                    ></Input.Password>
-                  </Form.Item>
 
-                  <Form.Item>
-                    <Button className="My_Signup_Inp_Btn" htmlType="submit">
-                      Sign In
-                    </Button>
-                  </Form.Item>
-                </Form>
                 {/* Field Box */}
-                <div className="Login_Field_Box">
-                  <button>Sign In</button>
+                <div className="Login_Field_Box_Signup">
+                  <Form onFinish={handleFinish}>
+                    <Form.Item name={"email"}>
+                      <Input
+                        className="My_Signup_Inp"
+                        type="email"
+                        placeholder="Enter Email"
+                      ></Input>
+                    </Form.Item>
+                    <Form.Item name={"password"}>
+                      <Input.Password
+                        className="My_Signup_Inp_Pass"
+                        type="email"
+                        placeholder="Enter Password"
+                      ></Input.Password>
+                    </Form.Item>
+
+                    <Form.Item>
+                      <Button className="My_Signup_Inp_Btn" htmlType="submit">
+                        Sign In
+                      </Button>
+                    </Form.Item>
+                  </Form>
                 </div>
+
+                {/* Field Box */}
+                {/* <div className="Login_Field_Box">
+                  <button>Sign In</button>
+                </div> */}
                 {/* Field Box Last */}
                 <div className="Login_Field_Box_Last">
                   <div className="Login_Last_Part_1">

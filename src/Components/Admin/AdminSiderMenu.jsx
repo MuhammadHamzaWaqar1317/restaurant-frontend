@@ -1,4 +1,4 @@
-import { CoffeeOutlined, ShopOutlined } from "@ant-design/icons";
+import { CoffeeOutlined, ShopOutlined, CheckCircleOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -46,6 +46,23 @@ function AdminSiderMenu() {
             },
             // Add navigation for "Branch" label
             onClick: () => navigate("/admin/branch"),
+          },
+          {
+            key: "3",
+            icon: <CheckCircleOutlined />,
+            label: "Reservations",
+            style: {
+              backgroundColor: "#e7f0e7",
+              color: "#0a4621",
+              borderRadius: "5px",
+              fontSize: "15px",
+              letterSpacing: "1px",
+              display: "block",
+              margin: "10px auto 0px auto",
+              width: "92%",
+            },
+            // Add navigation for "Branch" label
+            onClick: () => navigate("/admin/reservations"),
           },
         ]}
       />

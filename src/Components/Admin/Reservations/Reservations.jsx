@@ -21,6 +21,8 @@ import ModalComponent from "../../ModalComponent/ModalComponent";
 import to24Hour from "../../../Utils/to24Hour";
 import processDateTime from "../../../Utils/processDateTime";
 import { useForm } from "antd/es/form/Form";
+// CSS
+import "../Branch/Branch.scss";
 
 function Reservations() {
   const [form] = useForm();
@@ -233,15 +235,20 @@ function Reservations() {
   ];
   return (
     <>
-      <ModalComponent
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        setForm={setForm}
-        form={form}
-        FormContent={FormContent}
-        handleCancel={handleCancel}
-      />
-      <Table dataSource={dummyData} columns={columns} />
+      <div className="min-h-[80vh] max-w-[100vw]">
+        {/* <div> */}
+        <h1 className="Branch_H">Reservations</h1>
+        <br />
+        <ModalComponent
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          setForm={setForm}
+          form={form}
+          FormContent={FormContent}
+          handleCancel={handleCancel}
+        />
+        <Table dataSource={dummyData} columns={columns} />
+      </div>
     </>
   );
 }
