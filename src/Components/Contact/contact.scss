@@ -1,10 +1,12 @@
-.My_Parent {
+// - Contact.jsx - ( Use Mostly About CSS )
+
+.My_Parent_About_C {
   // --- 1 - Navbar ---
   .Parent_Navbar_Whole {
     position: relative;
     border: 0px solid transparent;
     padding: 0em 0em 0.1em 0em;
-    background: url("../../assets/bg.jpg") no-repeat center center;
+    background: url("../../assets/contact.jpg") no-repeat center center;
     background-size: cover;
 
     &::before {
@@ -237,7 +239,7 @@
       // 2 - Background Txt
       .Background_Txt_Parent {
         border: 0px solid transparent;
-        padding: 9em 1em 9em 1em;
+        padding: 5em 1em 5em 1em;
 
         h1 {
           border: 0px solid transparent;
@@ -270,180 +272,7 @@
     }
   }
 
-  // --- 2 - Opens + Rating ---
-  .Parent_Opens_Whole {
-    border: 0px solid transparent;
-    padding: 0.4em 2em 0.4em 2em;
-    border-bottom: 1px solid lightgrey;
-
-    .Parent_Opens_Whole_Sub {
-      border: 0px solid transparent;
-      padding: 0.4em 2em 0.4em 2em;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-
-      .Box_Open_Main {
-        border: 0px solid transparent;
-        margin: 0em 0em 0em 0.5em;
-        padding: 0.3em 0.3em 0.3em 0.3em;
-        width: 19%;
-        background-color: white;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        border-radius: 5px;
-
-        .Box_Open_Main_Part_1 {
-          border: 0px solid transparent;
-          width: 30%;
-          padding: 0.1em 0.1em 0.1em 0.1em;
-
-          img {
-            border: 0px solid transparent;
-            width: 57%;
-            display: block;
-            margin: 0em auto;
-          }
-        }
-
-        .Box_Open_Main_Part_2 {
-          border: 0px solid transparent;
-          width: 70%;
-          text-align: center;
-          padding: 0.1em 0.1em 0.1em 0.1em;
-        }
-      }
-    }
-  }
-
-  // --- 3 - Menu ---
-  .Parent_Menu_Whole {
-    border: 0px solid transparent;
-    padding: 1em 1em 1em 1em;
-
-    .Parent_Menu_Whole_Sub {
-      border: 0px solid transparent;
-      padding: 1em 1em 1em 1em;
-
-      .Menu_Box {
-        border: 0px solid transparent;
-        padding: 1em 1em 1em 1em;
-        // background-color: lightcyan;
-
-        h1 {
-          border: 0px solid transparent;
-          font-size: 2em;
-          font-weight: 700;
-          letter-spacing: 2px;
-          padding: 0.5em 0em 0.5em 0em;
-        }
-
-        .Menu_Box_Sub {
-          border: 0px solid transparent;
-          padding: 0.5em 0.2em 0.5em 0.2em;
-          display: flex;
-          flex-direction: row;
-          justify-content: left;
-          align-items: center;
-          flex-wrap: wrap;
-          row-gap: 1em;
-          gap: 0.7em;
-
-          .Menu_Item_Box {
-            position: relative;
-            border: 0.1px solid rgb(224, 224, 224);
-            padding: 0.6em 0.2em 0.6em 0.2em;
-            width: 32%;
-            // background-color: lightgoldenrodyellow;
-            background-color: white;
-            border-radius: 5px;
-
-            .Menu_Item_Box_Sub {
-              border: 0px solid transparent;
-              padding: 0.2em 0.2em 0.2em 0.2em;
-              display: flex;
-              flex-direction: row;
-              justify-content: flex-start;
-              align-items: center;
-
-              .Menu_Item_Box_Sub_Part1 {
-                border: 0px solid transparent;
-                padding: 0.1em 0.1em 0.1em 0.1em;
-                width: 75%;
-
-                .Menu_Item_P1 {
-                  border: 0px solid transparent;
-                  font-weight: bold;
-                  font-size: 0.9em;
-                  letter-spacing: 1px;
-                }
-                span {
-                  border: 0px solid transparent;
-                  font-size: 0.8em;
-                  letter-spacing: 1px;
-                }
-                .Menu_Item_P2 {
-                  border: 0px solid transparent;
-                  padding: 1em 0em 0em 0em;
-                  font-weight: 600;
-                  font-size: 0.9em;
-                  letter-spacing: 1px;
-                  color: #0a4621;
-                }
-              }
-
-              .Menu_Item_Box_Sub_Part2 {
-                border: 0px solid transparent;
-                padding: 0.1em 0.1em 0.1em 0.1em;
-                width: 20%;
-                height: 11vh;
-
-                img {
-                  width: 100%;
-                  height: 10vh;
-                  display: block;
-                  margin: 0em auto;
-                }
-              }
-
-              button {
-                border: 0px solid transparent;
-                padding: 0.3em 0.2em 0.3em 0.2em;
-                width: 10%;
-                position: absolute;
-                top: 0px;
-                right: 0px;
-                background: linear-gradient(to top, #1aad53, #0a4621);
-                border-bottom-left-radius: 20px;
-                border-top-right-radius: 5px;
-
-                i {
-                  color: white;
-                  font-size: 0.95em;
-                }
-              }
-
-              button:hover {
-                cursor: pointer;
-                background: linear-gradient(to top, #0a4621, #0a4621);
-              }
-            }
-          }
-
-          .Menu_Item_Box:hover {
-            cursor: pointer;
-            box-shadow: rgba(100, 100, 111, 0.315) 0px 7px 29px 0px;
-            transform: scale(1.02);
-          }
-        }
-      }
-    }
-  }
-
-  // --- 4 - Footer ---
+  // --- 2 - Footer ---
   .Parent_Footer_Whole {
     border: 0px solid transparent;
     padding: 3em 0em 0em 0em;
@@ -705,7 +534,8 @@
 /* -------------------------------- */
 /* 0 - First Media Queries */
 @media screen and (min-width: 1px) and (max-width: 1400px) {
-  .My_Parent {
+
+  .My_Parent_About_C {
     // --- 1 - Navbar ---
     .Parent_Navbar_Whole {
       padding: 0em 0em 0.1em 0em;
@@ -998,13 +828,15 @@
         }
       }
     }
+
     // -
   }
 }
 
 /* 1 - First Media Queries */
 @media screen and (min-width: 1px) and (max-width: 1200px) {
-  .My_Parent {
+
+  .My_Parent_About_C {
     // --- 1 - Navbar ---
     .Parent_Navbar_Whole {
       padding: 0em 0em 0.1em 0em;
@@ -1257,13 +1089,15 @@
         }
       }
     }
+
     // -
   }
 }
 
 /* 2 - First Media Queries */
 @media screen and (min-width: 1px) and (max-width: 1000px) {
-  .My_Parent {
+
+  .My_Parent_About_C {
     // --- 1 - Navbar ---
     .Parent_Navbar_Whole {
       padding: 0em 0em 0em 0em;
@@ -1397,7 +1231,6 @@
           .Menu_Box_Sub {
             padding: 0.5em 0.2em 0.5em 0.2em;
             row-gap: 0.8em;
-            gap: 0.3em;
 
             .Menu_Item_Box {
               padding: 0.1em 0.1em 0.1em 0.1em;
@@ -1518,13 +1351,15 @@
         }
       }
     }
+
     // -
   }
 }
 
 /* 3 - First Media Queries */
 @media screen and (min-width: 1px) and (max-width: 800px) {
-  .My_Parent {
+
+  .My_Parent_About_C {
     // --- 1 - Navbar ---
     .Parent_Navbar_Whole {
       padding: 0em 0em 0em 0em;
@@ -1777,13 +1612,15 @@
         }
       }
     }
+
     // -
   }
 }
 
 /* 4 - First Media Queries */
 @media screen and (min-width: 1px) and (max-width: 600px) {
-  .My_Parent {
+
+  .My_Parent_About_C {
     // --- 1 - Navbar ---
     .Parent_Navbar_Whole {
       .Sub_Parent_Navbar_Whole {
@@ -2182,7 +2019,8 @@
 
 /* 5 - First Media Queries */
 @media screen and (min-width: 1px) and (max-width: 400px) {
-  .My_Parent {
+
+  .My_Parent_About_C {
     // --- 1 - Navbar ---
     .Parent_Navbar_Whole {
       .Sub_Parent_Navbar_Whole {
@@ -2281,9 +2119,9 @@
           padding: 0.2em 0.1em 0.2em 0.1em;
 
           h1 {
-            font-size: 1.4em;
+            font-size: 1.8em;
             letter-spacing: 2px;
-            padding: 0.8em 0em 0.8em 0.4em;
+            padding: 0em 0em 0em 0.3em;
           }
 
           .Menu_Box_Sub {
@@ -2573,3 +2411,5 @@
     // -
   }
 }
+
+// --- The End ---
