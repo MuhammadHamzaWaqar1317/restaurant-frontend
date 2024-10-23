@@ -71,7 +71,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "../src/index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../store.js";
 import App from "../src/App.jsx";
@@ -128,6 +132,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Navigate to={"/admin/menu"} />,
+      },
+      {
+        path: "menu",
         element: <Menu />,
       },
       {
@@ -150,6 +158,10 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Navigate to={"/user/reservation"} />,
+      },
+      {
+        path: "reservation",
         element: <Reservation />,
       },
     ],
