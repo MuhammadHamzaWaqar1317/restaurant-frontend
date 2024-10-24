@@ -18,8 +18,14 @@ function CartDrawer({ open, setOpen }) {
     return (
       <>
         <Button>Place Order</Button>
-        {cart.length != 0 &&
-          cart.reduce((accumulator, { total }) => accumulator + total, 0)}
+        {cart.length != 0 && (
+          <span>
+            {cart.reduce(
+              (accumulator, { total }) => accumulator + parseInt(total),
+              0
+            )}
+          </span>
+        )}
       </>
     );
   };
