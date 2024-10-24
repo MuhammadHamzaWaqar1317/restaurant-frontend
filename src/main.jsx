@@ -90,6 +90,7 @@ import AdminSiderMenu from "./Components/Admin/AdminSiderMenu.jsx";
 import UserSiderMenu from "./Components/User/UserSiderMenu.jsx";
 import Reservation from "./Components/User/Reservation/Reservation.jsx";
 import Reservations from "./Components/Admin/Reservations/Reservations.jsx";
+import UserMenu from "./Components/User/Menu/Menu.jsx";
 
 import ProtectedRoutes from "./Components/Routes/ProtectedRoutes.jsx";
 import PublicRoutes from "./Components/Routes/PublicRoutes.jsx";
@@ -158,11 +159,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to={"/user/reservation"} />,
+        element: <Navigate to={"/user/menu"} />,
       },
       {
         path: "reservation",
         element: <Reservation />,
+      },
+      {
+        path: "menu",
+        element: <UserMenu />,
       },
     ],
   },

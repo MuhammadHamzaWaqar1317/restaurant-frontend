@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { signInThunk, signUpThunk } from "../Thunks/UserApi";
+import { signInThunk, signUpThunk, getUserInfoThunk } from "../Thunks/UserApi";
 
 const initialState = {
   status: "initails menu api status",
@@ -7,6 +7,7 @@ const initialState = {
   socketId: "",
   _id: "",
   cart: [],
+  address: "",
 };
 
 const userSlice = createSlice({
@@ -69,6 +70,14 @@ const userSlice = createSlice({
     });
 
     builder.addCase(signInThunk.rejected, (state, action) => {
+      // add show Error toast here
+    });
+
+    builder.addCase(getUserInfoThunk.fulfilled, (state, action) => {
+      state.address = action.payload.data.address;
+    });
+
+    builder.addCase(getUserInfoThunk.rejected, (state, action) => {
       // add show Error toast here
     });
   },

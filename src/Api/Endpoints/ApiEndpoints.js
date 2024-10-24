@@ -8,6 +8,8 @@ export const signUp = (body) => api.post(`${unauthEndpoint}/sign-up`, body);
 
 export const signIn = (body) => api.post(`${unauthEndpoint}/sign-in`, body);
 
+export const getUserInfo = () => api.get(`${authEndpoint}/employee`);
+
 export const getMenu = () => api.get(`${authEndpoint}/admin/menu`);
 
 export const addMenu = (menuItem) =>

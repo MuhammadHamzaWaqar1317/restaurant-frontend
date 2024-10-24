@@ -3,6 +3,8 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Layout as AntdLayout, theme } from "antd";
 import { Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import CartDrawer from "../User/CartDrawer/CartDrawer";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import "./layout.scss"; // Import the SCSS file for styles
 
 const { Header, Sider, Content } = AntdLayout;
@@ -10,6 +12,7 @@ const { Header, Sider, Content } = AntdLayout;
 const Layout = ({ Menu }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false); // To handle media query behavior
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -67,6 +70,11 @@ const Layout = ({ Menu }) => {
               color: "#0a4621",
             }}
           />
+          <Button onClick={() => setOpenDrawer(true)}>
+            <ShoppingCartOutlined />
+          </Button>
+
+          <CartDrawer open={openDrawer} setOpen={setOpenDrawer} />
         </Header>
         <Content
           style={{

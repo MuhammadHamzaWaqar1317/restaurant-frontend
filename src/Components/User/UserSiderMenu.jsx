@@ -16,6 +16,23 @@ function UserSiderMenu() {
           {
             key: "1",
             icon: <CheckCircleOutlined />,
+            label: "Menu",
+            style: {
+              backgroundColor: "#e7f0e7",
+              color: "#0a4621",
+              borderRadius: "5px",
+              fontSize: "15px",
+              letterSpacing: "1px",
+              display: "block",
+              margin: "0px auto 0px auto",
+              width: "92%",
+            },
+            // Add navigation for "Menu" label
+            onClick: () => navigate("/user/menu"),
+          },
+          {
+            key: "1",
+            icon: <CheckCircleOutlined />,
             label: "Reservation",
             style: {
               backgroundColor: "#e7f0e7",
@@ -28,7 +45,7 @@ function UserSiderMenu() {
               width: "92%",
             },
             // Add navigation for "Menu" label
-            onClick: () => navigate("/user"),
+            onClick: () => navigate("/user/reservation"),
           },
           //   {
           //     key: "2",
