@@ -15,10 +15,33 @@ import { EditOutlined } from "@ant-design/icons";
 import { useForm } from "antd/es/form/Form";
 function CartDrawer({ open, setOpen }) {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.userSlice.cart);
+  // const cart = useSelector((state) => state.userSlice.cart);
   const menu = useSelector((state) => state.menuSlice.menu);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = useForm();
+
+  const cart = [
+    {
+      category: "Burger",
+      _id: "67135a5bb6b12376db14d7bc",
+      qty: 1,
+    },
+    {
+      category: "Fries",
+      _id: "670d6dd5f5fd09ffcde6b8d8",
+      qty: 3,
+    },
+    {
+      category: "Fries",
+      _id: "670d778ff5fd09ffcde6b8fa",
+      qty: 1,
+    },
+    {
+      category: "Fries",
+      _id: "670f47ae4f689237d6de624b",
+      qty: 1,
+    },
+  ];
 
   const addItem = (body) => {
     dispatch(addToCart(body));
@@ -43,7 +66,7 @@ function CartDrawer({ open, setOpen }) {
     return (
       <>
         <Button onClick={() => setIsModalOpen(true)}>Place Order</Button>
-        {cart.length != 0 && (
+        {/* {cart.length != 0 && (
           <span>
             {cart.reduce(
               (accumulator, { category, qty, _id }) =>
@@ -51,7 +74,8 @@ function CartDrawer({ open, setOpen }) {
               0
             )}
           </span>
-        )}
+        )} */}
+        7550
       </>
     );
   };
@@ -75,26 +99,31 @@ function CartDrawer({ open, setOpen }) {
         footer={<Footer />}
       >
         {cart?.map((cartItem) => {
-          const menuItem = menu[cartItem.category]?.find(
-            (menuItems) => menuItems._id == cartItem._id
-          );
-          console.log(menuItem, "cartItem map");
-
+          // const menuItem = menu[cartItem?.category]?.find(
+          //   (menuItems) => menuItems?._id == cartItem?._id
+          // );
+          // console.log(menuItem, "cartItem map");
+          const menuItem = {};
           return (
             <>
               <div className="Menu_Item_Box">
                 <div className="Menu_Item_Box_Sub">
                   <div className="Menu_Item_Box_Sub_Part1">
-                    <p className="Menu_Item_P1">{menuItem.name}</p>
-                    <span>{menuItem.description}</span>
-                    <p className="Menu_Item_P2">PKR {menuItem.priceprice}</p>
+                    <p className="Menu_Item_P1">{menuItem?.name ?? "Zinger"}</p>
+                    <span>
+                      {menuItem?.description ??
+                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, voluptatem temporibus "}{" "}
+                    </span>
+                    <p className="Menu_Item_P2">
+                      PKR {menuItem?.priceprice ?? "Zinger"}
+                    </p>
                   </div>
                   <div className="Menu_Item_Box_Sub_Part2">
                     {/* <img src={img} alt={name} /> */}
                   </div>
                   <div>Price {menuItem.price}</div>
                   <div>Qty {cartItem.qty}</div>
-                  <div>Total Price {menuItem.price * cartItem.qty}</div>
+                  <div>Total Price {menuItem?.price ?? 550 * cartItem.qty}</div>
                   <Button onClick={() => addItem(menuItem)}>+</Button>
 
                   <Button onClick={() => decreaseQty(menuItem)}>-</Button>

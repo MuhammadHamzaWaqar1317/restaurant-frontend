@@ -11,12 +11,133 @@ import to24Hour from "../../../Utils/to24Hour";
 
 function Orders() {
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orderSlice.orders);
-  const branches = useSelector((state) => state.branchSlice.branches);
+  //   const orders = useSelector((state) => state.orderSlice.orders);
+  //   const branches = useSelector((state) => state.branchSlice.branches);
   const menu = useSelector((state) => state.menuSlice.menu);
   const [orderDetailsId, setOrderDetailsId] = useState();
   const [openDrawer, setOpenDrawer] = useState(false);
-  console.log(orders);
+
+  const orders = [
+    {
+      _id: "671e6ff04bea31ba71bb80b1",
+      customerId: "671660cfee058464c3f8ea78",
+      branchId: "670fd77c110152d4ef2319a3",
+      type: "Takeaway",
+      status: "Pending",
+      order: [
+        {
+          qty: 1,
+          itemId: "67135a5bb6b12376db14d7bc",
+          category: "Burger",
+          price: 400,
+        },
+        {
+          qty: 1,
+          itemId: "670d6dd5f5fd09ffcde6b8d8",
+          category: "Fries",
+          price: 1232,
+        },
+      ],
+      totalBill: 1632,
+      createdAt: "2024-10-27T16:53:04.176Z",
+      updatedAt: "2024-10-27T16:53:04.176Z",
+      __v: 0,
+      customerName: "ads",
+      customerAddress: "gulshand address",
+    },
+    {
+      _id: "671e6ff04bea31ba71bb80b1",
+      customerId: "671660cfee058464c3f8ea78",
+      branchId: "670fd77c110152d4ef2319a3",
+      type: "Delivery",
+      status: "Pending",
+      order: [
+        {
+          qty: 1,
+          itemId: "67135a5bb6b12376db14d7bc",
+          category: "Burger",
+          price: 400,
+        },
+        {
+          qty: 1,
+          itemId: "670d6dd5f5fd09ffcde6b8d8",
+          category: "Fries",
+          price: 1232,
+        },
+      ],
+      totalBill: 1632,
+      createdAt: "2024-10-27T16:53:04.176Z",
+      updatedAt: "2024-10-27T16:53:04.176Z",
+      __v: 0,
+      customerName: "ads",
+      customerAddress: "gulshand address",
+    },
+    {
+      _id: "671e6ff04bea31ba71bb80b1",
+      customerId: "671660cfee058464c3f8ea78",
+      branchId: "670fd77c110152d4ef2319a3",
+      type: "Takeaway",
+      status: "Pending",
+      order: [
+        {
+          qty: 1,
+          itemId: "67135a5bb6b12376db14d7bc",
+          category: "Burger",
+          price: 400,
+        },
+        {
+          qty: 1,
+          itemId: "670d6dd5f5fd09ffcde6b8d8",
+          category: "Fries",
+          price: 1232,
+        },
+      ],
+      totalBill: 1632,
+      createdAt: "2024-10-27T16:53:04.176Z",
+      updatedAt: "2024-10-27T16:53:04.176Z",
+      __v: 0,
+      customerName: "ads",
+      customerAddress: "gulshand address",
+    },
+  ];
+
+  const branches = [
+    {
+      _id: "670fd77c110152d4ef2319a3",
+      address: "house abc, street 123, sector abc, pwd, Rawalpindi",
+      contactNum: "923245653423",
+      tables: [
+        {
+          seatingSize: "4",
+          qty: "9",
+          id: "88f7ec33-b884-4d6e-8722-20a678701d5d",
+        },
+      ],
+      createdAt: "2024-10-16T15:10:52.762Z",
+      updatedAt: "2024-10-19T13:52:14.649Z",
+      __v: 0,
+    },
+    {
+      _id: "670fd7c2110152d4ef2319a6",
+      address: "asdfaad",
+      contactNum: "925467677777",
+      tables: [
+        {
+          seatingSize: "2",
+          qty: "10",
+          id: "d12f01cc-64f7-498c-98ef-4107d252fb60",
+        },
+        {
+          seatingSize: "4",
+          qty: "5",
+          id: "d6f00c37-8fdf-4537-b642-72ea093f898b",
+        },
+      ],
+      createdAt: "2024-10-16T15:12:02.898Z",
+      updatedAt: "2024-10-21T17:50:47.800Z",
+      __v: 0,
+    },
+  ];
 
   useEffect(() => {
     dispatch(getOrdersThunk());
@@ -137,7 +258,7 @@ function Details({ orderDetails, branches, menu }) {
           return (
             <>
               <div>
-                {orderItem?.qty} x {menuItem?.name}
+                {orderItem?.qty} x {menuItem?.name ?? "Zinger"}
               </div>
               <div>Price {orderItem?.price}</div>
             </>

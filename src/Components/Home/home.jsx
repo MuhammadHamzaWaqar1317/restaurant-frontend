@@ -315,28 +315,6 @@ function Home() {
       <div className="Parent_Menu_Whole">
         <div className="Parent_Menu_Whole_Sub">
           <MenuItems />
-          {/* {Chicken.length != 0 && (
-            <MenuItem categoryText={"Chicken"} ItemArray={Chicken} />
-          )}
-          {Burger.length != 0 && (
-            <MenuItem categoryText={"Burger"} ItemArray={Burger} />
-          )}
-
-          {Fries.length != 0 && (
-            <MenuItem categoryText={"Fries"} ItemArray={Fries} />
-          )}
-
-          {Salads.length != 0 && (
-            <MenuItem categoryText={"Salads"} ItemArray={Salads} />
-          )}
-          {Drinks.length != 0 && (
-            <MenuItem categoryText={"Drinks"} ItemArray={Drinks} />
-          )}
-          {Sauces.length != 0 && (
-            <MenuItem categoryText={"Sauces"} ItemArray={Sauces} />
-          )} */}
-
-          {/* --- New Home Page Menu Design Testing - ( Using Grid ) */}
         </div>
       </div>
       {/* 4 - Footer */}
