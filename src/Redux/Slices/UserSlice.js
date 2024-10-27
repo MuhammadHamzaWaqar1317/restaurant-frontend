@@ -28,12 +28,12 @@ const userSlice = createSlice({
         state.cart?.push({
           ...action.payload,
           qty: 1,
-          total: action.payload.price,
+          // total: action.payload.price,
         });
       } else {
         state.cart[index].qty += 1;
-        state.cart[index].total =
-          state.cart[index].qty * state.cart[index].price;
+        // state.cart[index].total =
+        //   state.cart[index].qty * state.cart[index].price;
       }
     },
 
@@ -47,9 +47,11 @@ const userSlice = createSlice({
         state.cart = state.cart?.filter(({ _id }) => _id != action.payload._id);
       } else {
         state.cart[index].qty -= 1;
-        state.cart[index].total =
-          state.cart[index].qty * state.cart[index].price;
       }
+    },
+
+    removeFromCart: (state, action) => {
+      state.cart = state.cart?.filter(({ _id }) => _id != action.payload._id);
     },
   },
   extraReducers: (builder) => {
@@ -83,6 +85,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setSocketId, addToCart, decrementQty } = userSlice.actions;
+export const { setSocketId, addToCart, decrementQty, removeFromCart } =
+  userSlice.actions;
 
 export default userSlice.reducer;

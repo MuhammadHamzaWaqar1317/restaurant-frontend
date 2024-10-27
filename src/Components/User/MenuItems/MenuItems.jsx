@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMenuThunk } from "../../../Redux/Thunks/MenuApi";
 import { addToCart } from "../../../Redux/Slices/UserSlice";
 
+import "../../Home/home";
+
 function MenuItems() {
   // Chicken API Item
   const dispatch = useDispatch();
@@ -46,7 +48,10 @@ function MenuItem({ categoryText, ItemArray }) {
   console.log(cart);
 
   const addItem = (body) => {
-    dispatch(addToCart(body));
+    const { category, _id } = body;
+    // console.log({ category, _id });
+
+    dispatch(addToCart({ category, _id }));
   };
   return (
     <>

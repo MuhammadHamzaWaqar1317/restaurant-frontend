@@ -90,6 +90,8 @@ import AdminSiderMenu from "./Components/Admin/AdminSiderMenu.jsx";
 import UserSiderMenu from "./Components/User/UserSiderMenu.jsx";
 import Reservation from "./Components/User/Reservation/Reservation.jsx";
 import Reservations from "./Components/Admin/Reservations/Reservations.jsx";
+import Orders from "./Components/Admin/Orders/Orders.jsx";
+import Order from "./Components/User/Order/Order.jsx";
 import UserMenu from "./Components/User/Menu/Menu.jsx";
 
 import ProtectedRoutes from "./Components/Routes/ProtectedRoutes.jsx";
@@ -147,6 +149,10 @@ const router = createBrowserRouter([
         path: "reservations",
         element: <Reservations />,
       },
+      {
+        path: "orders",
+        element: <Orders />,
+      },
     ],
   },
   {
@@ -168,6 +174,10 @@ const router = createBrowserRouter([
       {
         path: "menu",
         element: <UserMenu />,
+      },
+      {
+        path: "order",
+        element: <Order />,
       },
     ],
   },

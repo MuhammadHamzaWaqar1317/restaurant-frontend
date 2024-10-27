@@ -43,3 +43,11 @@ export const updateReservation = (reservation) =>
 
 export const deleteReservation = (reservationId) =>
   api.delete(`${authEndpoint}/admin/reservation?${reservationId.toString()}`);
+
+export const addOrder = (order) =>
+  api.post(`${authEndpoint}/admin/order`, order);
+
+export const getOrder = () => api.get(`${authEndpoint}/admin/order`);
+
+export const updateOrderStatus = (orderStatus) =>
+  api.patch(`${authEndpoint}/admin/order`, orderStatus);
