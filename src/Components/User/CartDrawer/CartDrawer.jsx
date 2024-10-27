@@ -142,12 +142,7 @@ const ConfirmOrder = (form) => {
         category,
       })),
     };
-    if (body.address == address) {
-      dispatch(addOrderThunk(body));
-    } else {
-      body = { ...body };
-    }
-    //
+    dispatch(addOrderThunk(body));
     console.log(body);
   };
 
