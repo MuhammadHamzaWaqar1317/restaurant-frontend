@@ -202,19 +202,22 @@ function Orders() {
 
   return (
     <>
-      {" "}
-      <Table dataSource={orders} columns={columns} />
-      <Drawer
-        title="My Order"
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
-      >
-        <Details
-          orderDetails={orders?.find(({ _id }) => orderDetailsId == _id)}
-          branches={branches}
-          menu={menu}
-        />
-      </Drawer>
+      <div className="min-h-[80vh] max-w-[100vw]">
+        <h1 className="Branch_H">Orders</h1>
+        <br />
+        <Table dataSource={orders} columns={columns} />
+        <Drawer
+          title="My Order"
+          open={openDrawer}
+          onClose={() => setOpenDrawer(false)}
+        >
+          <Details
+            orderDetails={orders?.find(({ _id }) => orderDetailsId == _id)}
+            branches={branches}
+            menu={menu}
+          />
+        </Drawer>
+      </div>
     </>
   );
 }
