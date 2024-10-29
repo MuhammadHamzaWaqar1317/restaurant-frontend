@@ -331,7 +331,6 @@
       .Menu_Box {
         border: 0px solid transparent;
         padding: 1em 1em 1em 1em;
-        // background-color: lightcyan;
 
         h1 {
           border: 0px solid transparent;
@@ -357,7 +356,6 @@
             border: 0.1px solid rgb(224, 224, 224);
             padding: 0.6em 0.2em 0.6em 0.2em;
             width: 32%;
-            // background-color: lightgoldenrodyellow;
             background-color: white;
             border-radius: 5px;
 
@@ -2272,10 +2270,10 @@
 
     // --- 3 - Menu ---
     .Parent_Menu_Whole {
-      padding: 0.2em 0em 0.2em 0em;
+      // padding: 0.2em 0em 0.2em 0em;
 
       .Parent_Menu_Whole_Sub {
-        padding: 0.2em 0em 0.2em 0em;
+        padding: 0.1em 0em 0.1em 0em;
 
         .Menu_Box {
           padding: 0.2em 0.1em 0.2em 0.1em;

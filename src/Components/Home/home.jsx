@@ -312,7 +312,7 @@ function Home() {
       </div>
 
       {/* 3 - Menu - ( New ) */}
-      <div className="Parent_Menu_Whole">
+      <div className="Parent_Menu_Whole p-1">
         <div className="Parent_Menu_Whole_Sub">
           <MenuItems />
         </div>
