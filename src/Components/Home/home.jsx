@@ -256,8 +256,10 @@ function Home() {
                   <i className="fa fa-search"></i>
                 </div>
               </div>
-              <Button type="link" onClick={() => setOpenDrawer(true)}>
-                <ShoppingCartOutlined color="white" />
+              {/* --- My Cart Btn --- */}
+              <Button className="My_Cart_Btn" type="link" onClick={() => setOpenDrawer(true)}>
+                {/* <ShoppingCartOutlined color="white" /> */}
+                <i class="fa fa-cart-plus"></i>
               </Button>
               <input
                 type="search"
