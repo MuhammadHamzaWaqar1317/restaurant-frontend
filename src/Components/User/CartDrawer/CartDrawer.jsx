@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Drawer, Button, Form, Radio, Select, Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
+import { FaPlus, FaMinus, FaTrashAlt } from "react-icons/fa";
 import {
   addToCart,
   decrementQty,
@@ -17,45 +18,33 @@ import "./CartDrawer.scss";
 
 function CartDrawer({ open, setOpen }) {
   const dispatch = useDispatch();
-  // const cart = useSelector((state) => state.userSlice.cart);
+  const cart = useSelector((state) => state.userSlice.cart);
   const menu = useSelector((state) => state.menuSlice.menu);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = useForm();
 
-  const cart = [
-    {
-      category: "Burger",
-      _id: "67135a5bb6b12376db14d7bc",
-      qty: 1,
-    },
-    {
-      category: "Fries",
-      _id: "670d6dd5f5fd09ffcde6b8d8",
-      qty: 3,
-    },
-    {
-      category: "Fries",
-      _id: "670d778ff5fd09ffcde6b8fa",
-      qty: 1,
-    },
-    {
-      category: "Fries",
-      _id: "670f47ae4f689237d6de624b",
-      qty: 1,
-    },
-  ];
-
-  const addItem = (body) => {
-    dispatch(addToCart(body));
-  };
-
-  const decreaseQty = (body) => {
-    dispatch(decrementQty(body));
-  };
-
-  const removeItem = (body) => {
-    dispatch(removeFromCart(body));
-  };
+  // const cart = [
+  //   {
+  //     category: "Burger",
+  //     _id: "67135a5bb6b12376db14d7bc",
+  //     qty: 1,
+  //   },
+  // {
+  //   category: "Fries",
+  //   _id: "670d6dd5f5fd09ffcde6b8d8",
+  //   qty: 3,
+  // },
+  // {
+  //   category: "Fries",
+  //   _id: "670d778ff5fd09ffcde6b8fa",
+  //   qty: 1,
+  // },
+  // {
+  //   category: "Fries",
+  //   _id: "670f47ae4f689237d6de624b",
+  //   qty: 1,
+  // },
+  // ];
 
   const Footer = () => {
     const findPrice = (category, _id) => {
@@ -71,24 +60,18 @@ function CartDrawer({ open, setOpen }) {
         <div className="Footer_Box">
           <div className="Footer_Part_1">
             <p>Total Cost</p>
-            <h1>$ 7550</h1>
+            <h1>
+              {cart.reduce(
+                (accumulator, { category, qty, _id }) =>
+                  accumulator + findPrice(category, _id) * qty,
+                0
+              )}
+            </h1>
           </div>
           <div className="Footer_Part_2">
-            <button>Place Order</button>
+            <button onClick={() => setIsModalOpen(true)}>Place Order</button>
           </div>
         </div>
-        {/* --- Old Footer ---  */}
-        {/* <Button onClick={() => setIsModalOpen(true)}>Place Order</Button> */}
-        {/* {cart.length != 0 && (
-          <span>
-            {cart.reduce(
-              (accumulator, { category, qty, _id }) =>
-                accumulator + findPrice(category, _id) * qty,
-              0
-            )}
-          </span>
-        )} */}
-        {/* 7550 */}
       </>
     );
   };
@@ -102,6 +85,80 @@ function CartDrawer({ open, setOpen }) {
     form.resetFields();
   };
 
+  const CartItem = ({ cartItem }) => {
+    const [editOptions, setEditOptions] = useState(true);
+    const menuItem = menu[cartItem?.category]?.find(
+      (menuItems) => menuItems?._id == cartItem?._id
+    );
+    console.log(menuItem, "cartItem map");
+
+    const addItem = () => {
+      dispatch(addToCart(menuItem));
+    };
+
+    const decreaseQty = () => {
+      dispatch(decrementQty(menuItem));
+    };
+
+    const removeItem = () => {
+      dispatch(removeFromCart(menuItem));
+    };
+
+    return (
+      <>
+        {/* --- New Cart Drawer Design --- */}
+
+        {/* --- Old --- */}
+        <div className="w-full h-[84px] flex gap-2">
+          <div className="h-[50px] w-[71px]">
+            <img
+              className="object-cover rounded-md h-full w-full"
+              src="https://imageproxy.wolt.com/menu/menu-images/5f71921263a6ac41b4e98c3c/8f2cae5a-67a5-11eb-aa3c-46efe57ab807__mann_o_salwa_45.jpeg?w=200"
+              alt=""
+            />
+          </div>
+          <div className="w-full flex justify-between">
+            <div className="flex flex-col gap-2">
+              <h4>{menuItem?.name}</h4>
+              <p>{menuItem?.price}</p>
+            </div>
+            <div
+              onMouseEnter={() => setEditOptions(false)}
+              onMouseLeave={() => setEditOptions(true)}
+            >
+              {editOptions ? (
+                <Button type="primary" ghost>
+                  {cartItem?.qty}
+                </Button>
+              ) : (
+                <div className=" h-[44px] max-w-[170px] w-full flex justify-center items-center gap-6 p-2 bg-green-100 hover:bg-green-200 rounded-l-lg">
+                  <div
+                    onClick={decreaseQty}
+                    className="w-[32px] h-[32px] bg-white flex justify-center items-center rounded-full"
+                  >
+                    <FaMinus color="green" />
+                  </div>
+                  <p className=" text-green-950 font-semibold">
+                    {cartItem?.qty}
+                  </p>
+                  <div
+                    onClick={addItem}
+                    className="w-[32px] h-[32px] bg-white flex justify-center items-center rounded-full"
+                  >
+                    <FaPlus color="green" />
+                  </div>
+                  <div className="" onClick={removeItem}>
+                    <FaTrashAlt color="green" />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       <Drawer
@@ -111,45 +168,9 @@ function CartDrawer({ open, setOpen }) {
         open={open}
         footer={<Footer />}
       >
-        {cart?.map((cartItem) => {
-          // const menuItem = menu[cartItem?.category]?.find(
-          //   (menuItems) => menuItems?._id == cartItem?._id
-          // );
-          // console.log(menuItem, "cartItem map");
-          const menuItem = {};
-          return (
-            <>
-              {/* --- New Cart Drawer Design --- */}
-
-              {/* --- Old --- */}
-              <div className="Menu_Item_Box">
-                <div className="Menu_Item_Box_Sub">
-                  <div className="Menu_Item_Box_Sub_Part1">
-                    <p className="Menu_Item_P1">{menuItem?.name ?? "Zinger"}</p>
-                    <span>
-                      {menuItem?.description ??
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, voluptatem temporibus "}{" "}
-                    </span>
-                    <p className="Menu_Item_P2">
-                      PKR {menuItem?.priceprice ?? "Zinger"}
-                    </p>
-                  </div>
-                  <div className="Menu_Item_Box_Sub_Part2">
-                    {/* <img src={img} alt={name} /> */}
-                  </div>
-                  <div>Price {menuItem.price}</div>
-                  <div>Qty {cartItem.qty}</div>
-                  <div>Total Price {menuItem?.price ?? 550 * cartItem.qty}</div>
-                  <Button onClick={() => addItem(menuItem)}>+</Button>
-
-                  <Button onClick={() => decreaseQty(menuItem)}>-</Button>
-                  <Button onClick={() => removeItem(menuItem)}>Delete</Button>
-                </div>
-              </div>
-              <br />
-            </>
-          );
-        })}
+        {cart?.map((cartItem) => (
+          <CartItem cartItem={cartItem} />
+        ))}
       </Drawer>
       <ModalComponent
         isModalOpen={isModalOpen}
