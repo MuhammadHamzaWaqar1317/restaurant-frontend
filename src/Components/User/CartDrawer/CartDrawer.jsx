@@ -6,6 +6,7 @@ import {
   addToCart,
   decrementQty,
   removeFromCart,
+  emptyCart,
 } from "../../../Redux/Slices/UserSlice";
 import { addOrderThunk } from "../../../Redux/Thunks/OrderApi";
 import { getBranchThunk } from "../../../Redux/Thunks/BranchApi";
@@ -15,13 +16,20 @@ import { EditOutlined } from "@ant-design/icons";
 import { useForm } from "antd/es/form/Form";
 // CSS
 import "./CartDrawer.scss";
+import { useNavigate } from "react-router-dom";
 
 function CartDrawer({ open, setOpen }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.userSlice.cart);
+  const navigate = useNavigate();
+  const address = useSelector((state) => state.userSlice.address);
   const menu = useSelector((state) => state.menuSlice.menu);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = useForm();
+
+  useEffect(() => {
+    dispatch(getUserInfoThunk());
+  }, []);
 
   // const cart = [
   //   {
@@ -93,15 +101,18 @@ function CartDrawer({ open, setOpen }) {
     console.log(menuItem, "cartItem map");
 
     const addItem = () => {
-      dispatch(addToCart(menuItem));
+      const { category, _id } = menuItem;
+      dispatch(addToCart({ category, _id }));
     };
 
     const decreaseQty = () => {
-      dispatch(decrementQty(menuItem));
+      const { category, _id } = menuItem;
+      dispatch(decrementQty({ category, _id }));
     };
 
     const removeItem = () => {
-      dispatch(removeFromCart(menuItem));
+      const { _id } = menuItem;
+      dispatch(removeFromCart({ _id }));
     };
 
     return (
@@ -119,8 +130,8 @@ function CartDrawer({ open, setOpen }) {
           </div>
           <div className="w-full flex justify-between">
             <div className="flex flex-col gap-2">
-              <h4>{menuItem?.name}</h4>
-              <p>{menuItem?.price}</p>
+              <h4 className="text-lg font-semibold">{menuItem?.name}</h4>
+              <p className="text-green-300">{menuItem?.price}</p>
             </div>
             <div
               onMouseEnter={() => setEditOptions(false)}
@@ -177,24 +188,24 @@ function CartDrawer({ open, setOpen }) {
         setIsModalOpen={setIsModalOpen}
         form={form}
         setForm={setForm}
-        FormContent={() => ConfirmOrder(form)}
+        FormContent={() => ConfirmOrder(form, address, handleCancel, navigate)}
         handleCancel={handleCancel}
       />
     </>
   );
 }
 
-const ConfirmOrder = (form) => {
+const ConfirmOrder = (form, address, handleCancel, navigate) => {
   const branches = useSelector((state) => state.branchSlice?.branches);
   const cart = useSelector((state) => state.userSlice.cart);
-  const address = useSelector((state) => state.userSlice.address);
+  // const address = useSelector((state) => state.userSlice.address);
   const dispatch = useDispatch();
   const [render, setRender] = useState(1);
   const [editAddress, setEditAddress] = useState(true);
 
   useEffect(() => {
     dispatch(getBranchThunk());
-    dispatch(getUserInfoThunk());
+    // dispatch(getUserInfoThunk());
     form.setFields([{ name: "address", value: address }]);
   }, []);
 
@@ -209,7 +220,9 @@ const ConfirmOrder = (form) => {
       })),
     };
     dispatch(addOrderThunk(body));
-    console.log(body);
+    handleCancel();
+    navigate("/user/order");
+    dispatch(emptyCart());
   };
 
   return (

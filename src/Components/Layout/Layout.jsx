@@ -156,7 +156,9 @@ const Layout = ({ Menu }) => {
             borderRadius: borderRadiusLG,
           }}
         >
+          {/* <div className="max-h-[100vh] overflow-scroll"> */}
           <Outlet />
+          {/* </div> */}
           {/* Call My_Data to display its content conditionally */}
           {My_Data()}
         </Content>

@@ -121,7 +121,6 @@ function ItemCards({ menuItem }) {
             <img
               className="rounded-md w-full object-cover"
               src={
-                img ??
                 "https://imageproxy.wolt.com/menu/menu-images/5f71921263a6ac41b4e98c3c/8f2cae5a-67a5-11eb-aa3c-46efe57ab807__mann_o_salwa_45.jpeg?w=200"
               }
               alt=""
@@ -143,7 +142,7 @@ function ItemCards({ menuItem }) {
                 </div>
                 <p className="relative text-green-950 font-semibold">{qty} </p>
                 <div
-                  onClick={() => setQty(qty + 1)}
+                  onClick={() => addItem({ category, _id })}
                   className="w-[32px] h-[32px] bg-white flex justify-center items-center rounded-full"
                 >
                   <FaPlus color="green" />

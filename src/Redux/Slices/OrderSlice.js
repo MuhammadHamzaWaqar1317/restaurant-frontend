@@ -29,7 +29,7 @@ const orderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getOrdersThunk.fulfilled, (state, action) => {
-      state.orders = action.payload.data;
+      state.orders = action.payload.data?.reverse();
     });
 
     builder.addCase(getOrdersThunk.rejected, (state, action) => {

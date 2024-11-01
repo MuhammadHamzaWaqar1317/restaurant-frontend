@@ -53,6 +53,10 @@ const userSlice = createSlice({
     removeFromCart: (state, action) => {
       state.cart = state.cart?.filter(({ _id }) => _id != action.payload._id);
     },
+
+    emptyCart: (state, action) => {
+      state.cart = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(signUpThunk.fulfilled, (state, action) => {
@@ -85,7 +89,12 @@ const userSlice = createSlice({
   },
 });
 
-export const { setSocketId, addToCart, decrementQty, removeFromCart } =
-  userSlice.actions;
+export const {
+  setSocketId,
+  addToCart,
+  decrementQty,
+  removeFromCart,
+  emptyCart,
+} = userSlice.actions;
 
 export default userSlice.reducer;
