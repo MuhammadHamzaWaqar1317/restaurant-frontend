@@ -6,9 +6,21 @@ import {
   ShopOutlined,
   CheckCircleOutlined,
   ShoppingCartOutlined,
+  BellOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
-import { Button, Layout as AntdLayout, theme } from "antd";
+import { IoFastFoodOutline } from "react-icons/io5";
+import { MdTableRestaurant } from "react-icons/md";
+import {
+  Button,
+  Dropdown,
+  Badge,
+  Divider,
+  Avatar,
+  Layout as AntdLayout,
+  theme,
+} from "antd";
+import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./layout.scss"; // Import the SCSS file for styles
@@ -18,6 +30,7 @@ import CartDrawer from "../User/CartDrawer/CartDrawer";
 const { Header, Sider, Content } = AntdLayout;
 
 const Layout = ({ Menu, User = false }) => {
+  const cart = useSelector((state) => state.userSlice.cart);
   const [openDrawer, setOpenDrawer] = useState(false);
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
@@ -27,7 +40,29 @@ const Layout = ({ Menu, User = false }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-
+  const items = [
+    {
+      key: "1as",
+      label: (
+        <div className="flex flex-col gap-3 ">
+          <div className="flex items-center gap-2 ">
+            <Avatar icon={<IoFastFoodOutline />} />
+            <p className="break-words max-w-[170px]">
+              Your order for 2024-12-4 has been cancelled
+            </p>
+          </div>
+          <hr />
+          <div className="flex items-center gap-2 ">
+            <Avatar icon={<MdTableRestaurant />} />
+            <p className="break-words max-w-[170px]">
+              Your order for 2024-12-4 has been cancelled
+            </p>
+          </div>
+          <hr />
+        </div>
+      ),
+    },
+  ];
   // Effect to handle window resize and update mobile view state
   useEffect(() => {
     const handleResize = () => {
@@ -153,14 +188,29 @@ const Layout = ({ Menu, User = false }) => {
                   color: "#0a4621",
                 }}
               />
-              {User && (
-                <Button
-                  className="self-center"
-                  onClick={() => setOpenDrawer(true)}
+              <div className="flex gap-4 items-center pr-4">
+                <Dropdown
+                  menu={{ items }}
+                  overlayStyle={{
+                    maxHeight: "440px",
+                    overflowY: "scroll",
+                    maxWidth: "250px",
+                    overflowX: "hidden",
+                  }}
                 >
-                  <ShoppingCartOutlined />
-                </Button>
-              )}
+                  <Badge count={0} color="green">
+                    <Avatar icon={<BellOutlined />} />
+                  </Badge>
+                </Dropdown>
+                {User && (
+                  <Badge count={cart?.length} color="green">
+                    <Avatar
+                      onClick={() => setOpenDrawer(true)}
+                      icon={<ShoppingCartOutlined />}
+                    />
+                  </Badge>
+                )}
+              </div>
             </div>
           </Header>
           <Content
