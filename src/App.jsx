@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import socket from "../src/Socket/socket";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addMenuItem,
@@ -145,7 +146,11 @@ function App({ children }) {
       socket.off("order_status_update");
     };
   }, []);
-  return <>{children}</>;
+  return (
+    <>
+      {children} <ToastContainer />
+    </>
+  );
 }
 
 export default App;

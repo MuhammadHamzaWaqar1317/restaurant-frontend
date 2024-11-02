@@ -5,6 +5,13 @@ import {
   updateOrderStatusThunk,
 } from "../Thunks/OrderApi";
 
+import {
+  showError,
+  showPending,
+  showSuccess,
+  removePending,
+} from "../../Components/Toaster/Toaster";
+
 const initialState = {
   status: "initails menu api status",
   message: "",
@@ -35,22 +42,32 @@ const orderSlice = createSlice({
     builder.addCase(getOrdersThunk.rejected, (state, action) => {
       console.log(action.payload);
 
-      // add show Error toast here
+      showError(action.payload?.message);
     });
-    builder.addCase(addOrderThunk.fulfilled, (state, action) => {});
+    builder.addCase(addOrderThunk.fulfilled, (state, action) => {
+      removePending();
+      showSuccess(action.payload?.message);
+    });
+    builder.addCase(addOrderThunk.pending, (state, action) => {
+      showPending("Submitting Data ");
+    });
 
     builder.addCase(addOrderThunk.rejected, (state, action) => {
-      console.log(action.payload);
-
-      // add show Error toast here
+      removePending();
+      showError(action.payload?.message);
     });
 
-    builder.addCase(updateOrderStatusThunk.fulfilled, (state, action) => {});
+    builder.addCase(updateOrderStatusThunk.fulfilled, (state, action) => {
+      removePending();
+      showSuccess(action.payload?.message);
+    });
+    builder.addCase(updateOrderStatusThunk.pending, (state, action) => {
+      showPending("Updating Status ");
+    });
 
     builder.addCase(updateOrderStatusThunk.rejected, (state, action) => {
-      console.log(action.payload);
-
-      // add show Error toast here
+      removePending();
+      showError(action.payload?.message);
     });
   },
 });

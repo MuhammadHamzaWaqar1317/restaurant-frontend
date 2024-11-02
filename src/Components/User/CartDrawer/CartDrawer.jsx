@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Drawer, Button, Form, Radio, Select, Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { FaPlus, FaMinus, FaTrashAlt } from "react-icons/fa";
+import { getUserId } from "../../../Utils/getUserId";
 import {
   addToCart,
   decrementQty,
@@ -17,6 +18,7 @@ import { useForm } from "antd/es/form/Form";
 // CSS
 import "./CartDrawer.scss";
 import { useNavigate } from "react-router-dom";
+import { showError } from "../../Toaster/Toaster";
 
 function CartDrawer({ open, setOpen }) {
   const dispatch = useDispatch();
@@ -62,6 +64,16 @@ function CartDrawer({ open, setOpen }) {
       return parseInt(price);
     };
 
+    const handleOrder = () => {
+      const { _id } = getUserId();
+      if (!_id) {
+        showError("Please SignIn to place Order");
+        navigate("/login");
+      } else {
+        setIsModalOpen(true);
+      }
+    };
+
     return (
       <>
         {/* --- New Footer Design ---  */}
@@ -77,7 +89,7 @@ function CartDrawer({ open, setOpen }) {
             </h1>
           </div>
           <div className="Footer_Part_2">
-            <button onClick={() => setIsModalOpen(true)}>Place Order</button>
+            <button onClick={handleOrder}>Place Order</button>
           </div>
         </div>
       </>
@@ -188,14 +200,16 @@ function CartDrawer({ open, setOpen }) {
         setIsModalOpen={setIsModalOpen}
         form={form}
         setForm={setForm}
-        FormContent={() => ConfirmOrder(form, address, handleCancel, navigate)}
+        FormContent={() =>
+          ConfirmOrder(form, address, handleCancel, navigate, setOpen)
+        }
         handleCancel={handleCancel}
       />
     </>
   );
 }
 
-const ConfirmOrder = (form, address, handleCancel, navigate) => {
+const ConfirmOrder = (form, address, handleCancel, navigate, setOpen) => {
   const branches = useSelector((state) => state.branchSlice?.branches);
   const cart = useSelector((state) => state.userSlice.cart);
   // const address = useSelector((state) => state.userSlice.address);
@@ -219,10 +233,12 @@ const ConfirmOrder = (form, address, handleCancel, navigate) => {
         category,
       })),
     };
+
     dispatch(addOrderThunk(body));
     handleCancel();
     navigate("/user/order");
     dispatch(emptyCart());
+    setOpen(false);
   };
 
   return (

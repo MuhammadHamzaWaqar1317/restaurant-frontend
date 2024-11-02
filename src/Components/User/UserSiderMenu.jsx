@@ -1,9 +1,25 @@
 import React from "react";
-import { CheckCircleOutlined, HomeOutlined, ShoppingOutlined } from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  HomeOutlined,
+  ShoppingOutlined,
+} from "@ant-design/icons";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 function UserSiderMenu() {
   const navigate = useNavigate();
+
+  const style = {
+    backgroundColor: "#e7f0e7",
+    color: "#0a4621",
+    borderRadius: "5px",
+    fontSize: "15px",
+    letterSpacing: "1px",
+    display: "block",
+    margin: "10px auto 0px auto",
+    width: "92%",
+  };
+
   return (
     <>
       <Menu
@@ -17,16 +33,7 @@ function UserSiderMenu() {
             key: "1",
             icon: <HomeOutlined />,
             label: "Dashboard",
-            style: {
-              backgroundColor: "#e7f0e7",
-              color: "#0a4621",
-              borderRadius: "5px",
-              fontSize: "15px",
-              letterSpacing: "1px",
-              display: "block",
-              margin: "10px auto 0px auto",
-              width: "92%",
-            },
+            style: { ...style },
             // Add navigation for "Menu" label
             onClick: () => navigate("/user/UserDash"),
           },
@@ -34,16 +41,7 @@ function UserSiderMenu() {
             key: "1",
             icon: <ShoppingOutlined />,
             label: "Order",
-            style: {
-              backgroundColor: "#e7f0e7",
-              color: "#0a4621",
-              borderRadius: "5px",
-              fontSize: "15px",
-              letterSpacing: "1px",
-              display: "block",
-              margin: "10px auto 0px auto",
-              width: "92%",
-            },
+            style: { ...style },
             // Add navigation for "Menu" label
             onClick: () => navigate("/user/order"),
           },
@@ -51,18 +49,17 @@ function UserSiderMenu() {
             key: "2",
             icon: <CheckCircleOutlined />,
             label: "Reservation",
-            style: {
-              backgroundColor: "#e7f0e7",
-              color: "#0a4621",
-              borderRadius: "5px",
-              fontSize: "15px",
-              letterSpacing: "1px",
-              display: "block",
-              margin: "10px auto 0px auto",
-              width: "92%",
-            },
+            style: { ...style },
             // Add navigation for "Menu" label
             onClick: () => navigate("/user/reservation"),
+          },
+          {
+            key: "3",
+            icon: <CheckCircleOutlined />,
+            label: "Menu",
+            style: { ...style },
+            // Add navigation for "Menu" label
+            onClick: () => navigate("/user/menu"),
           },
         ]}
       />

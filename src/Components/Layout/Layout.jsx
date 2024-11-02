@@ -5,6 +5,7 @@ import {
   CoffeeOutlined,
   ShopOutlined,
   CheckCircleOutlined,
+  ShoppingCartOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Button, Layout as AntdLayout, theme } from "antd";
@@ -12,10 +13,12 @@ import { Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./layout.scss"; // Import the SCSS file for styles
 import { useNavigate } from "react-router-dom";
+import CartDrawer from "../User/CartDrawer/CartDrawer";
 
 const { Header, Sider, Content } = AntdLayout;
 
-const Layout = ({ Menu }) => {
+const Layout = ({ Menu, User = false }) => {
+  const [openDrawer, setOpenDrawer] = useState(false);
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false); // To handle media query behavior
@@ -114,56 +117,69 @@ const Layout = ({ Menu }) => {
   };
 
   return (
-    <AntdLayout>
-      <Sider
-        trigger={null}
-        collapsible
-        collapsed={isMobileView ? true : collapsed}
-        className={`bg-green-950 ${collapsed ? "sider-collapsed" : ""}`}
-      >
-        <div className="demo-logo-vertical" />
-        <div className="menu_logo">
-          <img src={logo} alt="logo" />
-        </div>
-        <Menu />
-      </Sider>
+    <>
+      <CartDrawer open={openDrawer} setOpen={setOpenDrawer} />
       <AntdLayout>
-        <Header
-          style={{
-            padding: 0,
-            background: "white",
-          }}
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={isMobileView ? true : collapsed}
+          className={`bg-green-950 ${collapsed ? "sider-collapsed" : ""}`}
         >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={handleToggle} // Toggle collapse and My_Data visibility
-            className="collapsed-button"
+          <div className="demo-logo-vertical" />
+          <div className="menu_logo">
+            <img src={logo} alt="logo" />
+          </div>
+          <Menu />
+        </Sider>
+        <AntdLayout>
+          <Header
             style={{
-              fontSize: "10px",
-              width: 64,
-              height: 64,
-              backgroundColor: "white",
-              color: "#0a4621",
+              padding: 0,
+              background: "white",
             }}
-          />
-        </Header>
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          {/* <div className="max-h-[100vh] overflow-scroll"> */}
-          <Outlet />
-          {/* </div> */}
-          {/* Call My_Data to display its content conditionally */}
-          {My_Data()}
-        </Content>
+          >
+            <div className="flex justify-between">
+              <Button
+                type="text"
+                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                onClick={handleToggle} // Toggle collapse and My_Data visibility
+                className="collapsed-button"
+                style={{
+                  fontSize: "10px",
+                  width: 64,
+                  height: 64,
+                  backgroundColor: "white",
+                  color: "#0a4621",
+                }}
+              />
+              {User && (
+                <Button
+                  className="self-center"
+                  onClick={() => setOpenDrawer(true)}
+                >
+                  <ShoppingCartOutlined />
+                </Button>
+              )}
+            </div>
+          </Header>
+          <Content
+            style={{
+              margin: "24px 16px",
+              padding: 24,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            {/* <div className="max-h-[100vh] overflow-scroll"> */}
+            <Outlet />
+            {/* </div> */}
+            {/* Call My_Data to display its content conditionally */}
+            {My_Data()}
+          </Content>
+        </AntdLayout>
       </AntdLayout>
-    </AntdLayout>
+    </>
   );
 };
 
