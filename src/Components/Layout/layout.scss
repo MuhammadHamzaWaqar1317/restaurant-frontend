@@ -89,14 +89,14 @@
 
 // --- 2 - Bottom ---
 .ShowData_Box_Part_3_Footer {
-  border: 0.1px solid white;
-  padding: 2em 1em;
+  border: 0px solid transparent;
+  padding: 0em 0.8em 0em 0.8em;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: right;
   position: absolute;
-  bottom: 10px;
+  top: 700px;
 
   button {
     border: 0px solid transparent;
@@ -116,24 +116,106 @@
     }
   }
 
-  button:hover, button:focus {
+  button:hover,
+  button:focus {
     background-color: rgba(211, 3, 3, 0.87);
     cursor: pointer;
   }
 }
 
+// --- 4 - Sign Out Button When Collpased ---
+.MyBtnParent_Collapsed {
+  border: 0px solid transparent;
+  padding: 0em 0em 0em 0em;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  position: absolute;
+  top: 700px;
+
+  button {
+    border: 0px solid transparent;
+    background-color: red;
+    color: white;
+    display: block;
+    padding: 0.45em 1.7em;
+    letter-spacing: 1.5px;
+    font-size: 0.8em;
+    border-radius: 5px;
+    text-align: center;
+    border-radius: 20px;
+    line-height: 2.5vh;
+
+    .anticon {
+      color: white;
+      font-size: 1.1em;
+    }
+  }
+
+  button:hover,
+  button:focus {
+    background-color: rgba(211, 3, 3, 0.87);
+    cursor: pointer;
+  }
+}
+
+
+
 /* -------------------------------- */
 /* ----- Media Queries In CSS ----- */
 /* -------------------------------- */
-// /* 0 - First Media Queries */
-// @media screen and (min-width: 1px) and (max-width: 1400px) {
-//   // --- 2 - Responsive Layout ---
-// }
+/* 0 - First Media Queries */
+@media screen and (min-width: 1px) and (max-width: 1400px) {
+  // --- 2 - Bottom ---
+  .ShowData_Box_Part_3_Footer {
+    padding: 0em 0.8em 0em 0.8em;
+    width: 100%;
+    top: 685px;
+
+    button {
+      padding: 0.45em 1.7em;
+      letter-spacing: 1.5px;
+      font-size: 0.85em;
+
+      .anticon {
+        font-size: 1.1em;
+      }
+    }
+
+    button:hover,
+    button:focus {
+      background-color: rgba(211, 3, 3, 0.87);
+      cursor: pointer;
+    }
+  }
+}
 
 // /* 1 - First Media Queries */
-// @media screen and (min-width: 1px) and (max-width: 1200px) {
-//   // --- 1 - Responsive Layout ---
-// }
+@media screen and (min-width: 1px) and (max-width: 1200px) {
+  // --- 2 - Bottom ---
+  .ShowData_Box_Part_3_Footer {
+    padding: 0em 0.8em 0em 0.8em;
+    width: 100%;
+    top: 650px;
+
+    button {
+      padding: 0.45em 1.7em;
+      letter-spacing: 1.5px;
+      font-size: 0.8em;
+
+      .anticon {
+        font-size: 1.05em;
+      }
+    }
+
+    button:hover,
+    button:focus {
+      background-color: rgba(211, 3, 3, 0.87);
+      cursor: pointer;
+    }
+  }
+}
 
 /* 2 - First Media Queries */
 @media screen and (min-width: 1px) and (max-width: 1000px) {

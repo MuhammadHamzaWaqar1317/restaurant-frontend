@@ -153,13 +153,6 @@ const Layout = ({ Menu, User = false }) => {
                   </li>
                 </ul>
               </div>
-              {/* <div className="ShowData_Box_Part_3">
-                <ul>
-                  <li>
-                    <LogoutOutlined /> Logout
-                  </li>
-                </ul>
-              </div> */}
             </div>
           </div>
         </div>
@@ -192,6 +185,17 @@ const Layout = ({ Menu, User = false }) => {
           className={`bg-green-950 ${collapsed ? "sider-collapsed" : ""}`}
         >
           <div className="demo-logo-vertical" />
+          {/* Bottom */}
+          <div
+            className={
+              collapsed ? "MyBtnParent_Collapsed" : "ShowData_Box_Part_3_Footer"
+            }
+          >
+            <button>
+              <LogoutOutlined /> Logout
+            </button>
+          </div>
+          {/* Bottom */}
           <div className="menu_logo">
             <img src={logo} alt="logo" />
           </div>
@@ -230,12 +234,16 @@ const Layout = ({ Menu, User = false }) => {
                   }}
                 >
                   <Badge count={unReadNotifications} color="green">
-                    <Avatar icon={<BellOutlined />} />
+                    <Avatar
+                      style={{ backgroundColor: "#0a4621", cursor: "pointer" }}
+                      icon={<BellOutlined />}
+                    />
                   </Badge>
                 </Dropdown>
                 {User && (
                   <Badge count={cart?.length} color="green">
                     <Avatar
+                      style={{ backgroundColor: "#0a4621", cursor: "pointer" }}
                       onClick={() => setOpenDrawer(true)}
                       icon={<ShoppingCartOutlined />}
                     />
