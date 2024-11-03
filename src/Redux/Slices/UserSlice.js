@@ -9,6 +9,41 @@ const initialState = {
   cart: [],
   address: "",
   userInfo: {},
+  notifications: [
+    // {
+    //   icon: "reservation",
+    //   message: `Your Reservation at  has been updated `,
+    // },
+    // {
+    //   icon: "reservation",
+    //   message: `Your Reservation at    has been updated `,
+    // },
+    // {
+    //   icon: "reservation",
+    //   message: `Your Reservation at    has been updated `,
+    // },
+    // {
+    //   icon: "order",
+    //   message: `Your Reservation at    has been updated `,
+    // },
+    // {
+    //   icon: "reservation",
+    //   message: `Your Reservation at    has been updated `,
+    // },
+    // {
+    //   icon: "reservation",
+    //   message: `Your Reservation at    has been updated `,
+    // },
+    // {
+    //   icon: "reservation",
+    //   message: `Your Reservation at    has been updated `,
+    // },
+    // {
+    //   icon: "reservation",
+    //   message: `Your Reservation at    has been updated `,
+    // },
+  ],
+  unreadNotificationsCounter: 0,
 };
 
 const userSlice = createSlice({
@@ -58,6 +93,14 @@ const userSlice = createSlice({
     emptyCart: (state, action) => {
       state.cart = [];
     },
+
+    addNotification: (state, action) => {
+      state.notifications?.unshift(action.payload);
+      state.unreadNotificationsCounter += 1;
+    },
+    readAllNotifications: (state, action) => {
+      state.unreadNotificationsCounter = 0;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(signUpThunk.fulfilled, (state, action) => {
@@ -97,6 +140,8 @@ export const {
   decrementQty,
   removeFromCart,
   emptyCart,
+  addNotification,
+  readAllNotifications,
 } = userSlice.actions;
 
 export default userSlice.reducer;

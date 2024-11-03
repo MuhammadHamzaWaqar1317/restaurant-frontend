@@ -185,6 +185,7 @@ function CartDrawer({ open, setOpen }) {
   return (
     <>
       <Drawer
+        className="assad"
         title="My Order"
         width={520}
         onClose={() => setOpen(false)}

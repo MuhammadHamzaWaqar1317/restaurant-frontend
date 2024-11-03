@@ -20,17 +20,23 @@ import {
   Layout as AntdLayout,
   theme,
 } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./layout.scss"; // Import the SCSS file for styles
 import { useNavigate } from "react-router-dom";
 import CartDrawer from "../User/CartDrawer/CartDrawer";
+import { readAllNotifications } from "../../Redux/Slices/UserSlice";
 
 const { Header, Sider, Content } = AntdLayout;
 
 const Layout = ({ Menu, User = false }) => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.userSlice.cart);
+  const notifications = useSelector((state) => state.userSlice.notifications);
+  const unReadNotifications = useSelector(
+    (state) => state.userSlice.unreadNotificationsCounter
+  );
   const [openDrawer, setOpenDrawer] = useState(false);
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
@@ -40,25 +46,28 @@ const Layout = ({ Menu, User = false }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const notificationIcon = {
+    order: <IoFastFoodOutline />,
+    reservation: <MdTableRestaurant />,
+  };
+
   const items = [
     {
-      key: "1as",
+      key: "1",
       label: (
         <div className="flex flex-col gap-3 ">
-          <div className="flex items-center gap-2 ">
-            <Avatar icon={<IoFastFoodOutline />} />
-            <p className="break-words max-w-[170px]">
-              Your order for 2024-12-4 has been cancelled
-            </p>
-          </div>
-          <hr />
-          <div className="flex items-center gap-2 ">
-            <Avatar icon={<MdTableRestaurant />} />
-            <p className="break-words max-w-[170px]">
-              Your order for 2024-12-4 has been cancelled
-            </p>
-          </div>
-          <hr />
+          {notifications?.map((notification) => (
+            <>
+              <div className="flex items-center gap-2 ">
+                <Avatar icon={notificationIcon[notification?.icon]} />
+                <p className="break-words max-w-[170px]">
+                  {notification?.message}
+                </p>
+              </div>
+              <hr />
+            </>
+          ))}
         </div>
       ),
     },
@@ -190,6 +199,7 @@ const Layout = ({ Menu, User = false }) => {
               />
               <div className="flex gap-4 items-center pr-4">
                 <Dropdown
+                  onOpenChange={() => dispatch(readAllNotifications())}
                   menu={{ items }}
                   overlayStyle={{
                     maxHeight: "440px",
@@ -198,7 +208,7 @@ const Layout = ({ Menu, User = false }) => {
                     overflowX: "hidden",
                   }}
                 >
-                  <Badge count={0} color="green">
+                  <Badge count={unReadNotifications} color="green">
                     <Avatar icon={<BellOutlined />} />
                   </Badge>
                 </Dropdown>
