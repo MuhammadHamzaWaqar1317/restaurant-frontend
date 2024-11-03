@@ -214,6 +214,7 @@ function Orders() {
           onClose={() => setOpenDrawer(false)}
         >
           <Details
+            setOpenDrawer={setOpenDrawer}
             orderDetails={orders?.find(({ _id }) => orderDetailsId == _id)}
             branches={branches}
             menu={menu}
@@ -224,18 +225,21 @@ function Orders() {
   );
 }
 
-function Details({ orderDetails, branches, menu }) {
+function Details({ orderDetails, branches, menu, setOpenDrawer }) {
+  if (!orderDetails) {
+    setOpenDrawer(false);
+  }
   const {
-    order,
-    branchId,
-    customerName,
-    customerId,
-    totalBill,
-    status,
-    type,
-    customerAddress,
-    _id: orderId,
-  } = orderDetails;
+    order = null,
+    branchId = null,
+    customerName = null,
+    customerId = null,
+    totalBill = null,
+    status = null,
+    type = null,
+    customerAddress = null,
+    _id: orderId = null,
+  } = orderDetails || {};
   console.log(branches);
 
   const dispatch = useDispatch();
@@ -255,7 +259,7 @@ function Details({ orderDetails, branches, menu }) {
         {/* Order ID */}
         <div className="UserOrderCart_ID_Parent">
           <p className="UserOrderCart_ID">
-            Order Id: <span>{orderId.slice(-5)}</span>
+            Order Id: <span>{orderId?.slice(-5)}</span>
           </p>
         </div>
         {/* Body */}
@@ -334,9 +338,9 @@ function Details({ orderDetails, branches, menu }) {
                 // className="UserOrderCart_2_Box_3"
                 onChange={(value) => handleStatusChange(value)}
                 options={[
-                  { value: "pending", label: "Pending" },
-                  { value: "prepairing", label: "Prepairing" },
-                  { value: "ready", label: "Ready" },
+                  { value: "Pending", label: "Pending" },
+                  { value: "Prepairing", label: "Prepairing" },
+                  { value: "Ready", label: "Ready" },
                   { value: "disabled", label: "Disabled", disabled: true },
                 ]}
               />

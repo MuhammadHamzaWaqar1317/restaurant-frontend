@@ -19,19 +19,25 @@ import {
   Avatar,
   Layout as AntdLayout,
   theme,
+  Menu as AntdMenu,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./layout.scss"; // Import the SCSS file for styles
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import CartDrawer from "../User/CartDrawer/CartDrawer";
 import { readAllNotifications } from "../../Redux/Slices/UserSlice";
+import {
+  inProgressOrders,
+  completedOrders,
+} from "../../Redux/Slices/OrderSlice";
 
 const { Header, Sider, Content } = AntdLayout;
 
 const Layout = ({ Menu, User = false }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const cart = useSelector((state) => state.userSlice.cart);
   const notifications = useSelector((state) => state.userSlice.notifications);
   const unReadNotifications = useSelector(
@@ -51,6 +57,8 @@ const Layout = ({ Menu, User = false }) => {
     order: <IoFastFoodOutline />,
     reservation: <MdTableRestaurant />,
   };
+
+  console.log(location.pathname);
 
   const items = [
     {
@@ -160,6 +168,19 @@ const Layout = ({ Menu, User = false }) => {
     return null; // Return null if not visible
   };
 
+  const orderMenu = [
+    {
+      label: "In Progress Orders",
+      key: "inProgress",
+      onClick: () => dispatch(inProgressOrders()),
+    },
+    {
+      label: "Completed Orders",
+      key: "completed",
+      onClick: () => dispatch(completedOrders()),
+    },
+  ];
+
   return (
     <>
       <CartDrawer open={openDrawer} setOpen={setOpenDrawer} />
@@ -223,6 +244,16 @@ const Layout = ({ Menu, User = false }) => {
               </div>
             </div>
           </Header>
+          {(location.pathname == "/admin/orders" ||
+            location.pathname == "/user/order") && (
+            <div className="border-2 border-t-stone-100">
+              <AntdMenu
+                mode="horizontal"
+                items={orderMenu}
+                defaultSelectedKeys={["inProgress"]}
+              />
+            </div>
+          )}
           <Content
             style={{
               margin: "24px 16px",
