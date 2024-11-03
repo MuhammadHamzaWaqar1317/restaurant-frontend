@@ -186,20 +186,25 @@ const Layout = ({ Menu, User = false }) => {
         >
           <div className="demo-logo-vertical" />
           {/* Bottom */}
-          <div
-            className={
-              collapsed ? "MyBtnParent_Collapsed" : "ShowData_Box_Part_3_Footer"
-            }
-          >
-            <button>
-              <LogoutOutlined /> Logout
-            </button>
-          </div>
+
           {/* Bottom */}
           <div className="menu_logo">
             <img src={logo} alt="logo" />
           </div>
-          <Menu />
+          <div className="menu_content_wrapper">
+            <Menu />
+            <div
+              className={
+                collapsed
+                  ? "MyBtnParent_Collapsed"
+                  : "ShowData_Box_Part_3_Footer"
+              }
+            >
+              <button>
+                <LogoutOutlined /> Logout
+              </button>
+            </div>
+          </div>
         </Sider>
         <AntdLayout>
           <Header
