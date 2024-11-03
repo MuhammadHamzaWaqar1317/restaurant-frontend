@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   CheckCircleOutlined,
   HomeOutlined,
@@ -6,18 +6,25 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
+import "../Admin/AdminSiderMenu.scss"; // Import CSS file for hover effect
+
 function UserSiderMenu() {
   const navigate = useNavigate();
+  const [activeKey, setActiveKey] = useState("1");
 
   const style = {
-    backgroundColor: "#e7f0e7",
-    color: "#0a4621",
-    borderRadius: "5px",
+    color: "white", // Set color for inactive items
+    borderRadius: "50px",
     fontSize: "15px",
     letterSpacing: "1px",
     display: "block",
     margin: "10px auto 0px auto",
-    width: "92%",
+    width: "90%",
+  };
+
+  const activeStyle = {
+    ...style,
+    color: "#0a4621", // Set color for active item
   };
 
   return (
@@ -25,41 +32,76 @@ function UserSiderMenu() {
       <Menu
         theme="light"
         mode="inline"
-        defaultSelectedKeys={["1"]}
+        selectedKeys={[activeKey]}
         className="bg-green-950"
-        // style={{ backgroundColor: "#0a4621", }}
         items={[
           {
             key: "1",
-            icon: <HomeOutlined />,
+            icon: (
+              <HomeOutlined
+                style={{
+                  color: activeKey === "1" ? "#0a4621" : "white", // Color for active/inactive icon
+                }}
+              />
+            ),
             label: "Dashboard",
-            style: { ...style },
-            // Add navigation for "Menu" label
-            onClick: () => navigate("/user/UserDash"),
-          },
-          {
-            key: "1",
-            icon: <ShoppingOutlined />,
-            label: "Order",
-            style: { ...style },
-            // Add navigation for "Menu" label
-            onClick: () => navigate("/user/order"),
+            style: activeKey === "1" ? activeStyle : style,
+            onClick: () => {
+              setActiveKey("1");
+              navigate("/user/UserDash");
+            },
+            className: activeKey !== "1" ? "menu-item-hover" : "",
           },
           {
             key: "2",
-            icon: <CheckCircleOutlined />,
-            label: "Reservation",
-            style: { ...style },
-            // Add navigation for "Menu" label
-            onClick: () => navigate("/user/reservation"),
+            icon: (
+              <ShoppingOutlined
+                style={{
+                  color: activeKey === "2" ? "#0a4621" : "white", // Color for active/inactive icon
+                }}
+              />
+            ),
+            label: "Order",
+            style: activeKey === "2" ? activeStyle : style,
+            onClick: () => {
+              setActiveKey("2");
+              navigate("/user/order");
+            },
+            className: activeKey !== "2" ? "menu-item-hover" : "",
           },
           {
             key: "3",
-            icon: <CheckCircleOutlined />,
+            icon: (
+              <CheckCircleOutlined
+                style={{
+                  color: activeKey === "3" ? "#0a4621" : "white", // Color for active/inactive icon
+                }}
+              />
+            ),
+            label: "Reservation",
+            style: activeKey === "3" ? activeStyle : style,
+            onClick: () => {
+              setActiveKey("3");
+              navigate("/user/reservation");
+            },
+            className: activeKey !== "3" ? "menu-item-hover" : "",
+          },
+          {
+            key: "4",
+            icon: (
+              <CheckCircleOutlined
+                style={{
+                  color: activeKey === "4" ? "#0a4621" : "white", // Color for active/inactive icon
+                }}
+              />
+            ),
             label: "Menu",
-            style: { ...style },
-            // Add navigation for "Menu" label
-            onClick: () => navigate("/user/menu"),
+            style: activeKey === "4" ? activeStyle : style,
+            onClick: () => {
+              setActiveKey("4");
+              navigate("/user/menu");
+            },
+            className: activeKey !== "4" ? "menu-item-hover" : "",
           },
         ]}
       />
