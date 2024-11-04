@@ -17,14 +17,18 @@ import { EditOutlined } from "@ant-design/icons";
 import { useForm } from "antd/es/form/Form";
 // CSS
 import "./CartDrawer.scss";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { useNavigate } from "react-router-dom";
 import { showError } from "../../Toaster/Toaster";
+
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 function CartDrawer({ open, setOpen }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.userSlice.cart);
   const navigate = useNavigate();
-  const address = useSelector((state) => state.userSlice.address);
+  const userInfo = useSelector((state) => state.userSlice.userInfo);
   const menu = useSelector((state) => state.menuSlice.menu);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [form] = useForm();
@@ -65,6 +69,11 @@ function CartDrawer({ open, setOpen }) {
     };
 
     const handleOrder = () => {
+      if (cart?.length == 0) {
+        showError("Cart is Empty");
+        return;
+      }
+
       const { _id } = getUserId();
       if (!_id) {
         showError("Please SignIn to place Order");
@@ -202,7 +211,7 @@ function CartDrawer({ open, setOpen }) {
         form={form}
         setForm={setForm}
         FormContent={() =>
-          ConfirmOrder(form, address, handleCancel, navigate, setOpen)
+          ConfirmOrder(form, userInfo, handleCancel, navigate, setOpen)
         }
         handleCancel={handleCancel}
       />
@@ -210,23 +219,39 @@ function CartDrawer({ open, setOpen }) {
   );
 }
 
-const ConfirmOrder = (form, address, handleCancel, navigate, setOpen) => {
+const ConfirmOrder = (form, userInfo, handleCancel, navigate, setOpen) => {
   const branches = useSelector((state) => state.branchSlice?.branches);
   const cart = useSelector((state) => state.userSlice.cart);
+  const { address, contactNum, email } = userInfo;
   // const address = useSelector((state) => state.userSlice.address);
   const dispatch = useDispatch();
   const [render, setRender] = useState(1);
   const [editAddress, setEditAddress] = useState(true);
+  const [editEmail, setEditEmail] = useState(true);
 
   useEffect(() => {
     dispatch(getBranchThunk());
     // dispatch(getUserInfoThunk());
-    form.setFields([{ name: "address", value: address }]);
+    form.setFields([
+      { name: "address", value: address },
+      { name: "contactNum", value: contactNum },
+      { name: "email", value: email },
+    ]);
   }, []);
 
   const handleFinish = (body) => {
+    const address =
+      body.address == userInfo.address ? userInfo.address : body.address;
+    const contactNum =
+      body.contactNum == userInfo.contactNum
+        ? userInfo.contactNum
+        : body.contactNum;
+    const email = body.email == userInfo.email ? userInfo.email : body.email;
     body = {
       ...body,
+      address,
+      contactNum,
+      email,
       type: render == 1 ? "Delivery" : "Takeaway",
       order: cart?.map(({ category, _id, qty }) => ({
         qty,
@@ -245,6 +270,23 @@ const ConfirmOrder = (form, address, handleCancel, navigate, setOpen) => {
   return (
     <>
       <Form form={form} onFinish={handleFinish} layout="vertical">
+        <Form.Item
+          name={"contactNum"}
+          label="Contact Number"
+          rules={[{ required: true }]}
+        >
+          <PhoneInput />
+        </Form.Item>
+        <Form.Item name={"email"} label="Email">
+          <Input
+            readOnly={editEmail}
+            suffix={
+              <div onClick={() => setEditEmail(false)}>
+                <EditOutlined />
+              </div>
+            }
+          ></Input>
+        </Form.Item>
         <Form.Item>
           <Radio.Group
             onChange={(e) => setRender(e.target.value)}

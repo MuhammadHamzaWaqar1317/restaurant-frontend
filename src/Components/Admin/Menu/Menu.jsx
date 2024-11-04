@@ -272,70 +272,18 @@ function Menu() {
           handleCancel={handleCancel}
           setForm={setForm}
         />
-        {menuCategory?.map(({ _id, category }) => {
-          console.log();
-
-          return (
-            <>
-              {!!menu[_id] && menu[_id]?.length != 0 && (
-                <MenuCategory
-                  categoryText={category}
-                  menuItemsArray={menu[_id]}
-                  updateModal={updateModal}
-                  deleteMenuItem={deleteMenuItem}
-                />
-              )}
-            </>
-          );
-        })}
-        {/* {Chicken.length != 0 && (
-          <MenuCategory
-            categoryText={"Chicken"}
-            menuItemsArray={Chicken}
-            updateModal={updateModal}
-            deleteMenuItem={deleteMenuItem}
-          />
-        )}
-        {Burger.length != 0 && (
-          <MenuCategory
-            categoryText={"Burger"}
-            menuItemsArray={Burger}
-            updateModal={updateModal}
-            deleteMenuItem={deleteMenuItem}
-          />
-        )}
-        {Fries.length != 0 && (
-          <MenuCategory
-            categoryText={"Fries"}
-            menuItemsArray={Fries}
-            updateModal={updateModal}
-            deleteMenuItem={deleteMenuItem}
-          />
-        )}
-        {Salads.length != 0 && (
-          <MenuCategory
-            categoryText={"Salads"}
-            menuItemsArray={Salads}
-            updateModal={updateModal}
-            deleteMenuItem={deleteMenuItem}
-          />
-        )}
-        {Drinks.length != 0 && (
-          <MenuCategory
-            categoryText={"Drinks"}
-            menuItemsArray={Drinks}
-            updateModal={updateModal}
-            deleteMenuItem={deleteMenuItem}
-          />
-        )}
-        {Sauces.length != 0 && (
-          <MenuCategory
-            categoryText={"Sauces"}
-            menuItemsArray={Sauces}
-            updateModal={updateModal}
-            deleteMenuItem={deleteMenuItem}
-          />
-        )} */}
+        {menuCategory?.map(({ _id, category }) => (
+          <>
+            {!!menu[_id] && menu[_id]?.length != 0 && (
+              <MenuCategory
+                categoryText={category}
+                menuItemsArray={menu[_id]}
+                updateModal={updateModal}
+                deleteMenuItem={deleteMenuItem}
+              />
+            )}
+          </>
+        ))}
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { getMenuThunk } from "../../../Redux/Thunks/MenuApi";
+import { getMenuCategoryThunk } from "../../../Redux/Thunks/MenuCategoryApi";
 import { addToCart, decrementQty } from "../../../Redux/Slices/UserSlice";
 
 import "../../Home/home";
@@ -9,35 +10,24 @@ import "../../Home/home";
 function MenuItems() {
   // Chicken API Item
   const dispatch = useDispatch();
-  const { Fries, Burger, Chicken, Salads, Drinks, Sauces } = useSelector(
-    (state) => state.menuSlice.menu
+  const menu = useSelector((state) => state.menuSlice.menu);
+  const menuCategory = useSelector(
+    (state) => state.menuCategorySlice.menuCategory
   );
 
   useEffect(() => {
     dispatch(getMenuThunk());
+    dispatch(getMenuCategoryThunk());
   }, []);
   return (
     <>
-      {Chicken.length != 0 && (
-        <MenuItem categoryText={"Chicken"} ItemArray={Chicken} />
-      )}
-      {Burger.length != 0 && (
-        <MenuItem categoryText={"Burger"} ItemArray={Burger} />
-      )}
-
-      {Fries.length != 0 && (
-        <MenuItem categoryText={"Fries"} ItemArray={Fries} />
-      )}
-
-      {Salads.length != 0 && (
-        <MenuItem categoryText={"Salads"} ItemArray={Salads} />
-      )}
-      {Drinks.length != 0 && (
-        <MenuItem categoryText={"Drinks"} ItemArray={Drinks} />
-      )}
-      {Sauces.length != 0 && (
-        <MenuItem categoryText={"Sauces"} ItemArray={Sauces} />
-      )}
+      {menuCategory?.map(({ _id, category }) => (
+        <>
+          {!!menu[_id] && menu[_id]?.length != 0 && (
+            <MenuItem categoryText={category} ItemArray={menu[_id]} />
+          )}
+        </>
+      ))}
     </>
   );
 }
