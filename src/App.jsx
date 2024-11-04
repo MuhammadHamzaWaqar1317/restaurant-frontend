@@ -9,6 +9,7 @@ import {
   addMenuItem,
   updateMenuItem,
   deleteMenuItem,
+  deleteWholeCategory,
 } from "./Redux/Slices/MenuSlice";
 import {
   addMenuCategory,
@@ -82,6 +83,7 @@ function App({ children }) {
       console.log("menu_category_deleted delete socket", message);
 
       dispatch(deleteMenuCategory(message));
+      dispatch(deleteWholeCategory(message));
     });
 
     socket.on("branch_added", (message) => {
