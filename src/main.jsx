@@ -92,6 +92,7 @@ import AdminSiderMenu from "./Components/Admin/AdminSiderMenu.jsx";
 import UserSiderMenu from "./Components/User/UserSiderMenu.jsx";
 import Reservation from "./Components/User/Reservation/Reservation.jsx";
 import Reservations from "./Components/Admin/Reservations/Reservations.jsx";
+import MenuCategory from "./Components/Admin/MenuCategory/MenuCategory.jsx";
 
 import ProtectedRoutes from "./Components/Routes/ProtectedRoutes.jsx";
 import PublicRoutes from "./Components/Routes/PublicRoutes.jsx";
@@ -153,6 +154,10 @@ const router = createBrowserRouter([
       {
         path: "menu",
         element: <Menu />,
+      },
+      {
+        path: "menuCategory",
+        element: <MenuCategory />,
       },
       {
         path: "branch",

@@ -11,6 +11,11 @@ import {
   deleteMenuItem,
 } from "./Redux/Slices/MenuSlice";
 import {
+  addMenuCategory,
+  updateMenuCategory,
+  deleteMenuCategory,
+} from "./Redux/Slices/MenuCategorySlice";
+import {
   addBranch,
   updateBranch,
   deleteBranch,
@@ -20,6 +25,7 @@ import {
   updateReservation,
   deleteReservation,
 } from "./Redux/Slices/ReservationSlice";
+
 import { addOrder, updateOrderStatus } from "./Redux/Slices/OrderSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -59,6 +65,23 @@ function App({ children }) {
     socket.on("menu_item_deleted", (message) => {
       console.log(" menu  item deleted server", message);
       dispatch(deleteMenuItem(message));
+    });
+
+    socket.on("menu_category_added", (message) => {
+      console.log("menu_category_added added socket", message);
+
+      dispatch(addMenuCategory(message));
+    });
+
+    socket.on("menu_category_updated", (message) => {
+      console.log("menu_category_updated updated socket", message);
+
+      dispatch(updateMenuCategory(message));
+    });
+    socket.on("menu_category_deleted", (message) => {
+      console.log("menu_category_deleted delete socket", message);
+
+      dispatch(deleteMenuCategory(message));
     });
 
     socket.on("branch_added", (message) => {
@@ -194,6 +217,9 @@ function App({ children }) {
       socket.off("menu_item_added");
       socket.off("menu_item_updated");
       socket.off("menu_item_deleted");
+      socket.off("menu_category_added");
+      socket.off("menu_category_updated");
+      socket.off("menu_category_deleted");
       socket.off("branch_added");
       socket.off("branch_updated");
       socket.off("branch_deleted");
