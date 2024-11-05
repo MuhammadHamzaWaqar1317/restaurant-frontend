@@ -125,7 +125,9 @@ const Layout = ({ Menu, User = false }) => {
               <div className="ShowData_Box_Part_1">
                 <img src={logo} alt="NA" />
               </div>
-              <div className="ShowData_Box_Part_2">
+              <Menu />
+
+              {/* <div className="ShowData_Box_Part_2">
                 <ul>
                   <li
                     onClick={() => {
@@ -152,7 +154,7 @@ const Layout = ({ Menu, User = false }) => {
                     <CheckCircleOutlined /> Reservations
                   </li>
                 </ul>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

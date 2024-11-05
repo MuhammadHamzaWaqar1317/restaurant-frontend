@@ -73,8 +73,23 @@ function MenuCategory() {
       setIsModalOpen(false);
     };
     return (
-      <Form form={form} onFinish={handleFinish} layout="vertical">
-        <Form.Item name={"category"} label="Category">
+      <Form
+        form={form}
+        onFinish={handleFinish}
+        layout="vertical"
+        requiredMark={false}
+      >
+        <Form.Item
+          name={"category"}
+          label="Category"
+          rules={[
+            { required: true, message: "Please Enter a Category" },
+            {
+              pattern: new RegExp(/^[a-zA-Z]+(-[a-zA-Z]+)*$/),
+              message: "Category must not contain any special characters ",
+            },
+          ]}
+        >
           <Input></Input>
         </Form.Item>
       </Form>

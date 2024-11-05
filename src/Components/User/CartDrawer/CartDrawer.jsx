@@ -272,15 +272,31 @@ const ConfirmOrder = (form, userInfo, handleCancel, navigate, setOpen) => {
 
   return (
     <>
-      <Form form={form} onFinish={handleFinish} layout="vertical">
+      <Form
+        form={form}
+        onFinish={handleFinish}
+        layout="vertical"
+        requiredMark={false}
+      >
         <Form.Item
           name={"contactNum"}
           label="Contact Number"
-          rules={[{ required: true }]}
+          rules={[
+            { required: true, message: "Please input your Contact Number" },
+          ]}
         >
-          <PhoneInput />
+          <PhoneInput country={"pk"} />
         </Form.Item>
-        <Form.Item name={"email"} label="Email">
+        <Form.Item
+          name={"email"}
+          label="Email"
+          rules={[
+            { required: true, message: "Please input your Email" },
+            {
+              type: "email",
+            },
+          ]}
+        >
           <Input
             readOnly={editEmail}
             suffix={
@@ -290,7 +306,9 @@ const ConfirmOrder = (form, userInfo, handleCancel, navigate, setOpen) => {
             }
           ></Input>
         </Form.Item>
-        <Form.Item>
+        <Form.Item
+          rules={[{ required: true, message: "Please select an Option" }]}
+        >
           <Radio.Group
             onChange={(e) => setRender(e.target.value)}
             value={render}
@@ -301,7 +319,10 @@ const ConfirmOrder = (form, userInfo, handleCancel, navigate, setOpen) => {
         </Form.Item>
 
         {render == 1 && (
-          <Form.Item name={"address"}>
+          <Form.Item
+            name={"address"}
+            rules={[{ required: true, message: "Please input your Address" }]}
+          >
             <Input
               value={address}
               readOnly={editAddress}
@@ -314,7 +335,10 @@ const ConfirmOrder = (form, userInfo, handleCancel, navigate, setOpen) => {
           </Form.Item>
         )}
         {render == 2 && (
-          <Form.Item name={"branchId"}>
+          <Form.Item
+            name={"branchId"}
+            rules={[{ required: true, message: "Please select a Branch" }]}
+          >
             <Select
               placeholder="Select Branch"
               allowClear={true}

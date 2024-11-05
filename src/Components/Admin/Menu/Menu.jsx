@@ -168,14 +168,45 @@ function Menu() {
 
     return (
       <>
-        <Form onFinish={handleFinish} form={form} layout="vertical">
-          <Form.Item label="Name" name={"name"}>
+        <Form
+          onFinish={handleFinish}
+          form={form}
+          layout="vertical"
+          requiredMark={false}
+        >
+          <Form.Item
+            label="Name"
+            name={"name"}
+            rules={[{ required: true, message: "Please enter a menu name" }]}
+          >
             <Input placeholder={"Enter Name"}></Input>
           </Form.Item>
-          <Form.Item label="Price" name={"price"}>
+          <Form.Item
+            label="Price"
+            name={"price"}
+            rules={[
+              { required: true, message: "Please enter a menu price" },
+              {
+                validator: (_, value) => {
+                  if (value <= 0) {
+                    return Promise.reject(
+                      new Error("Value must be greater than 0 ")
+                    );
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
+          >
             <Input placeholder={"Enter Price"} type="number"></Input>
           </Form.Item>
-          <Form.Item label="Category" name={"categoryId"}>
+          <Form.Item
+            label="Category"
+            name={"categoryId"}
+            rules={[
+              { required: true, message: "Please select a menu category" },
+            ]}
+          >
             <Select
               allowClear
               options={menuCategory?.map(({ _id, category }) => ({
@@ -185,7 +216,13 @@ function Menu() {
               placeholder="select Category"
             />
           </Form.Item>
-          <Form.Item label="Description" name={"description"}>
+          <Form.Item
+            label="Description"
+            name={"description"}
+            rules={[
+              { required: true, message: "Please enter a menu description" },
+            ]}
+          >
             <Input placeholder={"Enter Description"}></Input>
           </Form.Item>
 
@@ -195,6 +232,7 @@ function Menu() {
               valuePropName="fileList"
               getValueFromEvent={normFile}
               noStyle
+              rules={[{ required: true, message: "Please select an image" }]}
             >
               <Upload.Dragger maxCount={1} name="files" listType="picture">
                 <p className="ant-upload-drag-icon">
