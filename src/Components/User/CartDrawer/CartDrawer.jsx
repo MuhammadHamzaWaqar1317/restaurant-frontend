@@ -61,8 +61,10 @@ function CartDrawer({ open, setOpen }) {
   // ];
 
   const Footer = () => {
-    const findPrice = (category, _id) => {
-      const { price } = menu[category]?.find(
+    const findPrice = (categoryId, _id) => {
+      console.log("categoryId", categoryId, "_id", _id);
+
+      const { price } = menu[categoryId]?.find(
         (menuItems) => menuItems._id == _id
       );
       return parseInt(price);
@@ -91,8 +93,8 @@ function CartDrawer({ open, setOpen }) {
             <p>Total Cost</p>
             <h1>
               {cart.reduce(
-                (accumulator, { category, qty, _id }) =>
-                  accumulator + findPrice(category, _id) * qty,
+                (accumulator, { categoryId, qty, _id }) =>
+                  accumulator + findPrice(categoryId, _id) * qty,
                 0
               )}
             </h1>
@@ -116,19 +118,20 @@ function CartDrawer({ open, setOpen }) {
 
   const CartItem = ({ cartItem }) => {
     const [editOptions, setEditOptions] = useState(true);
-    const menuItem = menu[cartItem?.category]?.find(
+    const menuItem = menu[cartItem?.categoryId]?.find(
       (menuItems) => menuItems?._id == cartItem?._id
     );
     console.log(menuItem, "cartItem map");
+    console.log("cartItem -----", cartItem);
 
     const addItem = () => {
-      const { category, _id } = menuItem;
-      dispatch(addToCart({ category, _id }));
+      const { categoryId, _id } = menuItem;
+      dispatch(addToCart({ categoryId, _id }));
     };
 
     const decreaseQty = () => {
-      const { category, _id } = menuItem;
-      dispatch(decrementQty({ category, _id }));
+      const { categoryId, _id } = menuItem;
+      dispatch(decrementQty({ categoryId, _id }));
     };
 
     const removeItem = () => {
@@ -253,10 +256,10 @@ const ConfirmOrder = (form, userInfo, handleCancel, navigate, setOpen) => {
       contactNum,
       email,
       type: render == 1 ? "Delivery" : "Takeaway",
-      order: cart?.map(({ category, _id, qty }) => ({
+      order: cart?.map(({ categoryId, _id, qty }) => ({
         qty,
         itemId: _id,
-        category,
+        categoryId,
       })),
     };
 
