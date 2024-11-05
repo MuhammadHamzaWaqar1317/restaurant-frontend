@@ -88,7 +88,7 @@
 }
 
 // --- 2 - Bottom ---
-.menu_content_wrapper{
+.menu_content_wrapper {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 300px);
@@ -165,8 +165,6 @@
     cursor: pointer;
   }
 }
-
-
 
 /* -------------------------------- */
 /* ----- Media Queries In CSS ----- */
@@ -277,6 +275,37 @@
                 font-size: 1.1em;
               }
             }
+          }
+        }
+
+        .ShowData_Box_Part_3 {
+          border: 0px solid transparent;
+          padding: 5em 1em 0em 1em;
+
+          button {
+            border: 0px solid transparent;
+            background-color: red;
+            color: white;
+            display: block;
+            margin: 0em auto;
+            padding: 0.45em 1.7em;
+            letter-spacing: 1.5px;
+            font-size: 0.8em;
+            border-radius: 5px;
+            text-align: center;
+            border-radius: 20px;
+            line-height: 2.5vh;
+
+            .anticon {
+              color: white;
+              font-size: 1.1em;
+            }
+          }
+
+          button:hover,
+          button:focus {
+            background-color: rgba(211, 3, 3, 0.87);
+            cursor: pointer;
           }
         }
       }

@@ -126,35 +126,11 @@ const Layout = ({ Menu, User = false }) => {
                 <img src={logo} alt="NA" />
               </div>
               <Menu />
-
-              {/* <div className="ShowData_Box_Part_2">
-                <ul>
-                  <li
-                    onClick={() => {
-                      navigate("/admin/menu");
-                      setShowMyData(false);
-                    }}
-                  >
-                    <CoffeeOutlined /> Menu
-                  </li>
-                  <li
-                    onClick={() => {
-                      navigate("/admin/branch");
-                      setShowMyData(false);
-                    }}
-                  >
-                    <ShopOutlined /> Branch
-                  </li>
-                  <li
-                    onClick={() => {
-                      navigate("/admin/reservations");
-                      setShowMyData(false);
-                    }}
-                  >
-                    <CheckCircleOutlined /> Reservations
-                  </li>
-                </ul>
-              </div> */}
+              <div className="ShowData_Box_Part_3">
+                <button>
+                  <LogoutOutlined /> Logout
+                </button>
+              </div>
             </div>
           </div>
         </div>
