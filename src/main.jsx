@@ -84,6 +84,8 @@ import Menu from "./Components/Admin/Menu/Menu.jsx";
 import Signup from "./Components/Authenticate/signup.jsx";
 import Layout from "./Components/Layout/Layout.jsx";
 import Home from "./Components/Home/home.jsx";
+import ForgetPassword from "./Components/Authenticate/ForgetPassword/ForgetPassword.jsx";
+import EnterOtp from "./Components/Authenticate/ForgetPassword/EnterOtp.jsx";
 import About from "./Components/About/about.jsx";
 import Contact from "./Components/Contact/contact.jsx";
 import Branch from "./Components/Admin/Branch/Branch.jsx";
@@ -102,6 +104,7 @@ import UserMenu from "./Components/User/Menu/Menu.jsx";
 
 import Orders from "./Components/Admin/Orders/Orders.jsx";
 import Order from "./Components/User/Order/Order.jsx";
+import CreateNewPassword from "./Components/Authenticate/ForgetPassword/CreateNewPassword.jsx";
 
 const router = createBrowserRouter([
   {
@@ -131,6 +134,18 @@ const router = createBrowserRouter([
       {
         path: "signUp",
         element: <Signup />,
+      },
+      {
+        path: "forgetPassword",
+        element: <ForgetPassword />,
+      },
+      {
+        path: "enterOtp",
+        element: <EnterOtp />,
+      },
+      {
+        path: "createNewPassword",
+        element: <CreateNewPassword />,
       },
     ],
   },
