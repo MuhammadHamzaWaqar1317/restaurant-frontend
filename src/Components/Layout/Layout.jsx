@@ -54,6 +54,7 @@ const Layout = ({ Menu, User = false }) => {
   } = theme.useToken();
 
   const notificationIcon = {
+    // constants file contains obj for key
     order: <IoFastFoodOutline />,
     reservation: <MdTableRestaurant />,
   };
