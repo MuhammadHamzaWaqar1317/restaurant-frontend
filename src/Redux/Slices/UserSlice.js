@@ -7,7 +7,12 @@ import {
   verifyOtpThunk,
   createNewPasswordThunk,
 } from "../Thunks/UserApi";
-import { showError, showSuccess } from "../../Components/Toaster/Toaster";
+import {
+  showError,
+  showPending,
+  showSuccess,
+  removePending,
+} from "../../Components/Toaster/Toaster";
 
 const initialState = {
   status: "initails menu api status",
@@ -120,21 +125,32 @@ const userSlice = createSlice({
     builder.addCase(signUpThunk.fulfilled, (state, action) => {
       const { navigate, authToken } = action.payload;
       localStorage.setItem("token", authToken);
+      removePending();
       navigate("/admin");
     });
 
+    builder.addCase(signUpThunk.pending, (state, action) => {
+      showPending("Creating Account");
+    });
+
     builder.addCase(signUpThunk.rejected, (state, action) => {
-      // add show Error toast here
+      removePending();
+      showError(action.payload?.message);
     });
 
     builder.addCase(signInThunk.fulfilled, (state, action) => {
       const { navigate, authToken } = action.payload;
       localStorage.setItem("token", authToken);
+      removePending();
       navigate("/admin");
     });
 
+    builder.addCase(signInThunk.pending, (state, action) => {
+      showPending("Validating Credentials");
+    });
     builder.addCase(signInThunk.rejected, (state, action) => {
-      // add show Error toast here
+      removePending();
+      showError(action.payload?.message);
     });
 
     builder.addCase(getUserInfoThunk.fulfilled, (state, action) => {
@@ -150,12 +166,16 @@ const userSlice = createSlice({
       const { message, navigate, email } = action.payload;
       // console.log(action.payload.message);
       localStorage.setItem("verified_email", email);
+      removePending();
       showSuccess(message);
       navigate("/enterOtp");
     });
-
+    builder.addCase(forgetPasswordThunk.pending, (state, action) => {
+      showPending("Sending OTP");
+    });
     builder.addCase(forgetPasswordThunk.rejected, (state, action) => {
       // add show Error toast here
+      removePending();
       showError(action.payload.message);
     });
 
@@ -164,12 +184,16 @@ const userSlice = createSlice({
       console.log(passwordResetToken);
 
       localStorage.setItem("token", passwordResetToken);
+      removePending();
       showSuccess(message);
       navigate("/createNewPassword");
     });
-
+    builder.addCase(verifyOtpThunk.pending, (state, action) => {
+      showPending("Verifying OTP");
+    });
     builder.addCase(verifyOtpThunk.rejected, (state, action) => {
       // add show Error toast here
+      removePending();
       showError(action.payload.message);
     });
 
@@ -178,12 +202,18 @@ const userSlice = createSlice({
 
       localStorage.setItem("token", "");
       localStorage.setItem("verified_email", "");
+      removePending();
       showSuccess(message);
       navigate("/login");
     });
 
+    builder.addCase(createNewPasswordThunk.pending, (state, action) => {
+      showPending("Creating New Password");
+    });
+
     builder.addCase(createNewPasswordThunk.rejected, (state, action) => {
       // add show Error toast here
+      removePending();
       showError(action.payload.message);
     });
   },

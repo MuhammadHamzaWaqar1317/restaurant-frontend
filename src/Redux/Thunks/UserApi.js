@@ -43,7 +43,8 @@ export const signInThunk = createAsyncThunk(
     } catch (error) {
       console.log(error);
       return rejectWithValue({
-        message: error?.response?.data?.error ?? `Failed `,
+        message:
+          error?.response?.data?.error ?? `Incorrect Username or Password `,
       });
     }
   }

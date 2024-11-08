@@ -12,6 +12,7 @@ import "./ForgetPass.scss";
 import OTP from "../../../assets/OTP.png";
 
 function EnterOtp() {
+  const [form] = Form.useForm();
   const verified_email = localStorage.getItem("verified_email");
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -76,8 +77,8 @@ function EnterOtp() {
             </div>
             {/* Part 3 */}
             <div className="Forget_MyForm">
-              <Form style={{ width: "100%" }}>
-                <Form.Item>
+              <Form style={{ width: "100%" }} form={form}>
+                <Form.Item name={"otp"}>
                   <Input.OTP
                     length={4}
                     style={{ width: "100%" }}
@@ -88,11 +89,12 @@ function EnterOtp() {
               </Form>
               <Button
                 type="link"
-                onClick={() =>
+                onClick={() => {
                   dispatch(
                     forgetPasswordThunk({ email: verified_email, navigate })
-                  )
-                }
+                  );
+                  form.resetFields();
+                }}
                 className="My_Back_Btn"
               >
                 Resend OTP
