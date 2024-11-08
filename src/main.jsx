@@ -106,6 +106,8 @@ import Orders from "./Components/Admin/Orders/Orders.jsx";
 import Order from "./Components/User/Order/Order.jsx";
 import CreateNewPassword from "./Components/Authenticate/ForgetPassword/CreateNewPassword.jsx";
 
+import { roles } from "./constants/constant.js";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -153,7 +155,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <ProtectedRoutes allowedRole={["admin"]}>
+      <ProtectedRoutes allowedRole={[roles.admin]}>
         <Layout Menu={AdminSiderMenu} />
       </ProtectedRoutes>
     ),
@@ -191,7 +193,7 @@ const router = createBrowserRouter([
   {
     path: "/user",
     element: (
-      <ProtectedRoutes allowedRole={["user"]}>
+      <ProtectedRoutes allowedRole={[roles.user]}>
         <Layout Menu={UserSiderMenu} User={true} />
       </ProtectedRoutes>
     ),

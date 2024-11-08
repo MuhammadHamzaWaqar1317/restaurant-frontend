@@ -6,7 +6,9 @@ import {
   getOrdersThunk,
   updateOrderStatusThunk,
 } from "../../../Redux/Thunks/OrderApi";
+import { getUserInfoThunk } from "../../../Redux/Thunks/UserApi";
 import { getMenuThunk } from "../../../Redux/Thunks/MenuApi";
+import { orderStatus } from "../../../constants/constant";
 import to24Hour from "../../../Utils/to24Hour";
 // CSS
 import "./Orders.scss";
@@ -16,6 +18,7 @@ function Orders() {
   const orders = useSelector((state) => state.orderSlice.orders);
   const branches = useSelector((state) => state.branchSlice.branches);
   const menu = useSelector((state) => state.menuSlice.menu);
+  const userInfo = useSelector((state) => state.userSlice.userInfo);
   const [orderDetailsId, setOrderDetailsId] = useState();
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -145,6 +148,7 @@ function Orders() {
     dispatch(getOrdersThunk());
     dispatch(getBranchThunk());
     dispatch(getMenuThunk());
+    dispatch(getUserInfoThunk());
   }, []);
 
   const columns = [
@@ -218,6 +222,7 @@ function Orders() {
             orderDetails={orders?.find(({ _id }) => orderDetailsId == _id)}
             branches={branches}
             menu={menu}
+            userInfo={userInfo}
           />
         </Drawer>
       </div>
@@ -225,7 +230,7 @@ function Orders() {
   );
 }
 
-function Details({ orderDetails, branches, menu, setOpenDrawer }) {
+function Details({ orderDetails, branches, menu, setOpenDrawer, userInfo }) {
   if (!orderDetails) {
     setOpenDrawer(false);
   }
@@ -240,7 +245,8 @@ function Details({ orderDetails, branches, menu, setOpenDrawer }) {
     customerAddress = null,
     _id: orderId = null,
   } = orderDetails || {};
-  console.log(branches);
+
+  const userDetails = userInfo?.find(({ _id }) => _id == customerId);
 
   const dispatch = useDispatch();
 
@@ -293,12 +299,12 @@ function Details({ orderDetails, branches, menu, setOpenDrawer }) {
             {/* - Box - */}
             <div className="UserOrderCart_1_Box">
               <h2>Phone :</h2>
-              <p>0333-593239230</p>
+              <p>{userDetails?.contactNum}</p>
             </div>
             {/* - Box - */}
             <div className="UserOrderCart_1_Box">
               <h2>Email :</h2>
-              <p>User@gmail.com</p>
+              <p>{userDetails?.email}</p>
             </div>
           </div>
           {/* Part 2 */}
@@ -338,10 +344,12 @@ function Details({ orderDetails, branches, menu, setOpenDrawer }) {
                 // className="UserOrderCart_2_Box_3"
                 onChange={(value) => handleStatusChange(value)}
                 options={[
-                  { value: "Pending", label: "Pending" },
-                  { value: "Prepairing", label: "Prepairing" },
-                  { value: "Ready", label: "Ready" },
-                  { value: "disabled", label: "Disabled", disabled: true },
+                  { value: orderStatus.pending, label: orderStatus.pending },
+                  {
+                    value: orderStatus.prepairing,
+                    label: orderStatus.prepairing,
+                  },
+                  { value: orderStatus.ready, label: orderStatus.ready },
                 ]}
               />
               <p>

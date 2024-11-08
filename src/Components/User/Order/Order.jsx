@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBranchThunk } from "../../../Redux/Thunks/BranchApi";
 import { getOrdersThunk } from "../../../Redux/Thunks/OrderApi";
 import { getMenuThunk } from "../../../Redux/Thunks/MenuApi";
+import { getUserInfoThunk } from "../../../Redux/Thunks/UserApi";
 // CSS
 import "./Order.scss";
 
@@ -12,6 +13,7 @@ function Order() {
   const orders = useSelector((state) => state.orderSlice.orders);
   const branches = useSelector((state) => state.branchSlice.branches);
   const menu = useSelector((state) => state.menuSlice.menu);
+  const userInfo = useSelector((state) => state.userSlice.userInfo);
 
   // const orders = [
   // {
@@ -145,6 +147,7 @@ function Order() {
     dispatch(getOrdersThunk());
     dispatch(getBranchThunk());
     dispatch(getMenuThunk());
+    dispatch(getUserInfoThunk());
   }, []);
   return (
     <>
@@ -158,6 +161,7 @@ function Order() {
               orderDetails={orderDetails}
               branches={branches}
               menu={menu}
+              userInfo={userInfo}
             />
             <br />
           </div>
@@ -167,20 +171,19 @@ function Order() {
   );
 }
 
-function Details({ orderDetails, branches, menu }) {
+function Details({ orderDetails, branches, menu, userInfo }) {
   const {
     order,
     branchId,
     customerName,
-    phoneNumber,
-    email,
     totalBill,
     status,
     type,
-    customerAddress,
     createdAt,
     _id: orderId,
   } = orderDetails;
+
+  const { email = null, contactNum = null, address = null } = userInfo || {};
 
   const branchAddress = branches?.find(({ _id }) => _id == branchId);
   console.log(branchAddress, "branchAddress");
@@ -217,14 +220,14 @@ function Details({ orderDetails, branches, menu }) {
             {type == "Delivery" && (
               <div className="UserOrder_Box_Part1_Box_L_Parent">
                 <p className="UserOrder_Box_Part1_Box_L1">Address :</p>
-                <p className="UserOrder_Box_Part1_Box_L2">{customerAddress}</p>
+                <p className="UserOrder_Box_Part1_Box_L2">{address}</p>
               </div>
             )}
             {/* - Line - */}
             <div className="UserOrder_Box_Part1_Box_L_Parent">
               <p className="UserOrder_Box_Part1_Box_L1">Phone :</p>
               <p className="UserOrder_Box_Part1_Box_L2">
-                {phoneNumber ?? "0321-7875903"}
+                {contactNum ?? "0321-7875903"}
               </p>
             </div>
             {/* - Line - */}

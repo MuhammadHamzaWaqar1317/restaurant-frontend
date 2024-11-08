@@ -138,8 +138,8 @@ const userSlice = createSlice({
     });
 
     builder.addCase(getUserInfoThunk.fulfilled, (state, action) => {
-      state.address = action.payload.data.address;
-      state.userInfo = action.payload.data;
+      state.address = action.payload?.data?.address;
+      state.userInfo = action.payload?.data;
     });
 
     builder.addCase(getUserInfoThunk.rejected, (state, action) => {

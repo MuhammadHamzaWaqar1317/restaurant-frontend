@@ -4,11 +4,11 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createNewPasswordThunk } from "../../../Redux/Thunks/UserApi";
 import { Form, Input, Button } from "antd";
+import { roles } from "../../../constants/constant";
 // CSS
 import "./ForgetPass.scss";
 // Image
 import ForgetPass from "../../../assets/NewPass.png";
-
 
 function CreateNewPassword() {
   const dispatch = useDispatch();
@@ -16,8 +16,8 @@ function CreateNewPassword() {
   useEffect(() => {
     const { role } = getUserId();
 
-    if (role != "passwordReset") {
-      return <Navigate to={"/"} />;
+    if (role != roles.passwordReset) {
+      navigate("/");
     }
   }, []);
 
