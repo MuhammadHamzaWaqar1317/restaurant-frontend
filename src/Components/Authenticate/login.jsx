@@ -84,10 +84,6 @@ function Login() {
                   </Form>
                 </div>
 
-                {/* Field Box */}
-                {/* <div className="Login_Field_Box">
-                  <button>Sign In</button>
-                </div> */}
                 {/* Field Box Last */}
                 <div className="Login_Field_Box_Last">
                   <div className="Login_Last_Part_1">

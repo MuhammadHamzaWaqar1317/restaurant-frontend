@@ -48,7 +48,6 @@ const menuSlice = createSlice({
 
       state.menu[categoryId] = state.menu[categoryId]?.filter(
         ({ _id }) => action.payload._id != _id
-        // console.log(_id, " |||||  ", action.payload, action.payload._id == _id)
       );
     },
 

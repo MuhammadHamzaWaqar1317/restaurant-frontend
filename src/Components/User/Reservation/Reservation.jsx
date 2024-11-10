@@ -39,35 +39,6 @@ function Reservation() {
     (state) => state.reservationSlice.reservations
   );
 
-  const dummyData = [
-    {
-      customerId: "671660cfee058464c3f8ea78",
-      branchId: "670fd77c110152d4ef2319a3",
-      date: "2024-10-22",
-      startTime: "22:00:00.000Z",
-      endTime: "01:00:00.000Z",
-      peopleQty: 2,
-      _id: "6717b24dc98ac43f524f7019",
-      createdAt: "2024-10-22T14:10:21.234Z",
-      updatedAt: "2024-10-22T14:10:21.234Z",
-      __v: 0,
-      customerName: "ads",
-    },
-    {
-      customerId: "671660cfee058464c3f8ea78",
-      branchId: "670fd77c110152d4ef2319a3",
-      date: "2024-10-22",
-      startTime: "22:00:00.000Z",
-      endTime: "01:00:00.000Z",
-      peopleQty: 2,
-      _id: "6717b24dc98ac43f524f7019",
-      createdAt: "2024-10-22T14:10:21.234Z",
-      updatedAt: "2024-10-22T14:10:21.234Z",
-      __v: 0,
-      customerName: "ads",
-    },
-  ];
-
   const addReservation = (body) => {
     body = { ...body, ...processDateTime(body) };
     console.log(body);
@@ -335,32 +306,6 @@ function Reservation() {
                     </Button>
                   </div>
                 </div>
-
-                {/* <p>People Qty: {peopleQty}</p>
-                <p>Date: {date}</p> */}
-                {/* <p>Start Time: {to24Hour(startTime)}</p>
-                <p>End Time: {to24Hour(endTime)}</p> */}
-                {/* <p>Address: {address}</p> */}
-
-                {/* <Button
-                  onClick={() =>
-                    updateModal({
-                      branchId,
-                      peopleQty,
-                      date,
-                      startTime,
-                      endTime,
-                      _id,
-                      customerName,
-                      customerId,
-                    })
-                  }
-                >
-                  Edit
-                </Button>
-                <Button onClick={() => deleteReservation(_id, customerId)}>
-                  Delete
-                </Button> */}
               </div>
             );
           }

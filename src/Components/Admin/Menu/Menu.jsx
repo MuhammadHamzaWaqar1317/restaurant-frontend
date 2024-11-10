@@ -284,34 +284,7 @@ function Menu() {
           </Button>
         </div>
         {/* --- New Menu Design --- */}
-        {/* <div className="New_Menu_Box">
-          <br />
-          <h1>Burger</h1>
-          <div className="New_Menu_Box_Sub">
-            {burgerData.map((item) => (
-              <div key={item.id} className="New_Menu_Item_Box">
-                <div className="New_Menu_Item_Box_Sub">
-                  <div className="New_Menu_Item_Box_Part_1">
-                    <img src={item.image} alt="NA" />
-                  </div>
-                  <div className="New_Menu_Item_Box_Part_2">
-                    <h3>{item.name.slice(0, 15)}</h3>
-                    <p>{item.description.slice(0, 60)}</p>
-                    <h5>{item.price} PKR</h5>
-                    <div className="New_Btn_Parent">
-                      <button className="New_Btn_1">
-                        <i class="fa fa-pencil"></i>
-                      </button>
-                      <button className="New_Btn_2">
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
+
         {/* --- New Menu Design --- */}
         <Modal
           formArray={formArray}

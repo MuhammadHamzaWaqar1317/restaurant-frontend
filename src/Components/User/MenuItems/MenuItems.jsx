@@ -141,18 +141,6 @@ function ItemCards({ menuItem }) {
 
 export default MenuItems;
 
-function SvgPlus() {
-  return (
-    <svg viewBox="0 0 24 24" class="i1fd8v5j">
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M0 12a1.5 1.5 0 001.5 1.5h8.75a.25.25 0 01.25.25v8.75a1.5 1.5 0 003 0v-8.75a.25.25 0 01.25-.25h8.75a1.5 1.5 0 000-3h-8.75a.25.25 0 01-.25-.25V1.5a1.5 1.5 0 00-3 0v8.75a.25.25 0 01-.25.25H1.5A1.5 1.5 0 000 12z"
-      ></path>
-    </svg>
-  );
-}
-
 function SvgHalal() {
   return (
     <svg
@@ -176,29 +164,4 @@ function SvgHalal() {
       </defs>
     </svg>
   );
-}
-{
-  /* <div className="Menu_Box">
-        <h1>{categoryText}</h1>
-        <div className="Menu_Box_Sub">
-          
-          {ItemArray?.map((item) => (
-            <div key={item.id} className="Menu_Item_Box">
-              <div className="Menu_Item_Box_Sub">
-                <div className="Menu_Item_Box_Sub_Part1">
-                  <p className="Menu_Item_P1">{item.name}</p>
-                  <span>{item.description}</span>
-                  <p className="Menu_Item_P2">PKR {item.price}</p>
-                </div>
-                <div className="Menu_Item_Box_Sub_Part2">
-                  <img src={item.img} alt={item.name} />
-                </div>
-                <button onClick={() => addItem(item)}>
-                  <i className="fa fa-plus"></i>
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div> */
 }

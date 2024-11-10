@@ -37,29 +37,6 @@ function CartDrawer({ open, setOpen }) {
     dispatch(getUserInfoThunk());
   }, []);
 
-  // const cart = [
-  //   {
-  //     category: "Burger",
-  //     _id: "67135a5bb6b12376db14d7bc",
-  //     qty: 1,
-  //   },
-  // {
-  //   category: "Fries",
-  //   _id: "670d6dd5f5fd09ffcde6b8d8",
-  //   qty: 3,
-  // },
-  // {
-  //   category: "Fries",
-  //   _id: "670d778ff5fd09ffcde6b8fa",
-  //   qty: 1,
-  // },
-  // {
-  //   category: "Fries",
-  //   _id: "670f47ae4f689237d6de624b",
-  //   qty: 1,
-  // },
-  // ];
-
   const Footer = () => {
     const findPrice = (categoryId, _id) => {
       console.log("categoryId", categoryId, "_id", _id);
