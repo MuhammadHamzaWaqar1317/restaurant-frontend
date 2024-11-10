@@ -107,13 +107,7 @@ function ItemCards({ menuItem }) {
         </div>
         <div className="flex items-center justify-end col-span-6">
           <div className="relative w-[174px] h-[116px] overflow-hidden">
-            <img
-              className="rounded-md w-full object-cover"
-              src={
-                "https://imageproxy.wolt.com/menu/menu-images/5f71921263a6ac41b4e98c3c/8f2cae5a-67a5-11eb-aa3c-46efe57ab807__mann_o_salwa_45.jpeg?w=200"
-              }
-              alt=""
-            />
+            <img className="rounded-md w-full object-cover" src={img} alt="" />
             {qty == 0 ? (
               <div
                 onClick={() => addItem({ categoryId, _id })}

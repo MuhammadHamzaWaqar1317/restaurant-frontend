@@ -67,6 +67,15 @@ function Menu() {
     "description",
   ]);
 
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   const openModal = (menuMethodText) => {
     setIsModalOpen(true);
     setMenuMethod(menuMethodText);
@@ -77,8 +86,18 @@ function Menu() {
     openModal("Update");
   };
 
-  const addMenuItem = (body) => {
+  const addMenuItem = async (body) => {
+    console.log(body);
+
     const { dragger } = body;
+    console.log(dragger);
+    const file = dragger[0]?.originFileObj;
+    if (file) {
+      // Convert to base64
+      const base64 = await convertToBase64(file);
+      dragger[0].thumbUrl = base64;
+    }
+
     const img = dragger[0].thumbUrl;
     delete body["dragger"];
     // console.log({ ...body, img: dragger[0].thumbUrl });
@@ -87,9 +106,14 @@ function Menu() {
     dispatch(addMenuThunk({ ...body, img }));
   };
 
-  const updateMenuItem = (body) => {
+  const updateMenuItem = async (body) => {
     const { _id } = updateMenuItemObj;
-
+    const file = body.dragger[0]?.originFileObj;
+    if (file) {
+      // Convert to base64
+      const base64 = await convertToBase64(file);
+      body.dragger[0].thumbUrl = base64;
+    }
     const img = body.dragger[0]?.thumbUrl;
     delete body["dragger"];
     console.log(body, "update item body");
